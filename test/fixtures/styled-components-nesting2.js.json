@@ -1,0 +1,149 @@
+{
+	"raws": {},
+	"type": "root",
+	"nodes": [
+		{
+			"raws": {
+				"semicolon": false,
+				"after": "\n"
+			},
+			"type": "root",
+			"nodes": [
+				{
+					"raws": {
+						"before": "\n\t",
+						"between": ": "
+					},
+					"type": "decl",
+					"source": {
+						"start": {
+							"line": 3,
+							"column": 2
+						},
+						"input": {
+							"file": "styled-components-nesting2.js",
+							"quasis": [
+								{
+									"start": 74,
+									"end": 92
+								},
+								{
+									"start": 120,
+									"end": 121
+								}
+							]
+						},
+						"end": {
+							"line": 3,
+							"column": 15
+						}
+					},
+					"prop": "padding",
+					"value": "10px"
+				},
+				{
+					"raws": {
+						"before": "\n\t"
+					},
+					"text": "${css`\n\t\tcolor: #b02d00;\n\t`}",
+					"type": "literal",
+					"source": {
+						"start": {
+							"line": 4,
+							"column": 2
+						},
+						"input": {
+							"file": "styled-components-nesting2.js",
+							"quasis": [
+								{
+									"start": 74,
+									"end": 92
+								},
+								{
+									"start": 120,
+									"end": 121
+								}
+							]
+						}
+					},
+					"nodes": [
+						{
+							"raws": {
+								"semicolon": true,
+								"after": "\n\t"
+							},
+							"type": "root",
+							"nodes": [
+								{
+									"raws": {
+										"before": "\n\t\t",
+										"between": ": "
+									},
+									"type": "decl",
+									"source": {
+										"start": {
+											"line": 3,
+											"column": 3
+										},
+										"input": {
+											"file": "styled-components-nesting2.js"
+										},
+										"end": {
+											"line": 3,
+											"column": 17
+										}
+									},
+									"prop": "color",
+									"value": "#b02d00"
+								}
+							],
+							"source": {
+								"input": {
+									"file": "styled-components-nesting2.js"
+								},
+								"start": {
+									"line": 2,
+									"column": 124
+								},
+								"inline": false,
+								"lang": "css"
+							}
+						}
+					]
+				}
+			],
+			"source": {
+				"input": {
+					"file": "styled-components-nesting2.js",
+					"quasis": [
+						{
+							"start": 74,
+							"end": 92
+						},
+						{
+							"start": 120,
+							"end": 121
+						}
+					]
+				},
+				"start": {
+					"line": 2,
+					"column": 26
+				},
+				"inline": false,
+				"lang": "template-literal",
+				"syntax": {}
+			}
+		}
+	],
+	"source": {
+		"input": {
+			"file": "styled-components-nesting2.js"
+		},
+		"start": {
+			"line": 1,
+			"column": 1
+		},
+		"lang": "jsx"
+	}
+}

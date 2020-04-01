@@ -1,6 +1,6 @@
 
 "use strict";
-const Node = require("postcss/lib/node");
+const Container = require("postcss/lib/container");
 
 /**
  * Represents a JS literal
@@ -13,7 +13,7 @@ const Node = require("postcss/lib/node");
  * literal.type       //=> 'literal'
  * literal.toString() //=> 'a{}'
  */
-class Literal extends Node {
+class Literal extends Container {
 	constructor (defaults) {
 		super(defaults);
 		this.type = "literal";
