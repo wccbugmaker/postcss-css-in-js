@@ -79,7 +79,7 @@ module.exports = {
 function parseTemplateLiteralStyles(styles, input, range) {
 	const offset = input.quasis[0].start;
 	const source = input.css;
-	const parseStyle = docFixer(source, input.parseOptions);
+	const parseStyle = docFixer(offset, source, input.parseOptions);
 
 	const nodes = [];
 	let index = range[0];
@@ -106,14 +106,15 @@ function parseTemplateLiteralStyles(styles, input, range) {
 }
 
 class LocalFixer {
-	constructor (lines, style, templateParse) {
+	constructor (offset, lines, style, templateParse) {
+		const startIndex = style.startIndex - offset
 		let line = 0;
-		let column = style.startIndex;
+		let column = startIndex;
 		lines.some((lineEndIndex, lineNumber) => {
-			if (lineEndIndex >= style.startIndex) {
+			if (lineEndIndex >= startIndex) {
 				line = lineNumber--;
 				if (lineNumber in lines) {
-					column = style.startIndex - lines[lineNumber] - 1;
+					column = startIndex - lines[lineNumber] - 1;
 				}
 				return true;
 			}
@@ -177,7 +178,7 @@ class LocalFixer {
 	}
 }
 
-function docFixer (source, opts) {
+function docFixer (offset, source, opts) {
 	let match;
 	const lines = [];
 	reNewLine.lastIndex = 0;
@@ -187,7 +188,7 @@ function docFixer (source, opts) {
 	lines.push(source.length);
 	return function parseStyle (style) {
 		const parse = style.syntax ? style.syntax.parse : postcssParse
-		return new LocalFixer(lines, style, parse).parse(opts);
+		return new LocalFixer(offset, lines, style, parse).parse(opts);
 	};
 }
 

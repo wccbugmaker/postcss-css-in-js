@@ -83,14 +83,14 @@
 									"source": {
 										"start": {
 											"line": 2,
-											"column": 122
+											"column": 47
 										},
 										"input": {
 											"file": "styled-components-nesting3.js"
 										},
 										"end": {
 											"line": 2,
-											"column": 136
+											"column": 61
 										}
 									},
 									"prop": "color",
@@ -103,7 +103,7 @@
 								},
 								"start": {
 									"line": 2,
-									"column": 122
+									"column": 47
 								},
 								"inline": false,
 								"lang": "css"
@@ -215,15 +215,15 @@
 									"type": "decl",
 									"source": {
 										"start": {
-											"line": 3,
-											"column": 195
+											"line": 8,
+											"column": 8
 										},
 										"input": {
 											"file": "styled-components-nesting3.js"
 										},
 										"end": {
-											"line": 3,
-											"column": 209
+											"line": 8,
+											"column": 22
 										}
 									},
 									"prop": "color",
@@ -235,8 +235,8 @@
 									"file": "styled-components-nesting3.js"
 								},
 								"start": {
-									"line": 3,
-									"column": 195
+									"line": 8,
+									"column": 8
 								},
 								"inline": false,
 								"lang": "css"
@@ -636,14 +636,14 @@
 									"type": "decl",
 									"source": {
 										"start": {
-											"line": 11,
+											"line": 24,
 											"column": 3
 										},
 										"input": {
 											"file": "styled-components-nesting3.js"
 										},
 										"end": {
-											"line": 11,
+											"line": 24,
 											"column": 20
 										}
 									},
@@ -658,14 +658,14 @@
 									"type": "decl",
 									"source": {
 										"start": {
-											"line": 12,
+											"line": 25,
 											"column": 3
 										},
 										"input": {
 											"file": "styled-components-nesting3.js"
 										},
 										"end": {
-											"line": 12,
+											"line": 25,
 											"column": 23
 										}
 									},
@@ -678,8 +678,8 @@
 									"file": "styled-components-nesting3.js"
 								},
 								"start": {
-									"line": 10,
-									"column": 578
+									"line": 23,
+									"column": 34
 								},
 								"inline": false,
 								"lang": "css"
@@ -791,15 +791,15 @@
 									"type": "decl",
 									"source": {
 										"start": {
-											"line": 28,
-											"column": 701
+											"line": 30,
+											"column": 27
 										},
 										"input": {
 											"file": "styled-components-nesting3.js"
 										},
 										"end": {
-											"line": 28,
-											"column": 711
+											"line": 30,
+											"column": 37
 										}
 									},
 									"prop": "color",
@@ -811,8 +811,8 @@
 									"file": "styled-components-nesting3.js"
 								},
 								"start": {
-									"line": 28,
-									"column": 701
+									"line": 30,
+									"column": 27
 								},
 								"inline": false,
 								"lang": "css"
@@ -833,15 +833,15 @@
 									"type": "decl",
 									"source": {
 										"start": {
-											"line": 28,
-											"column": 720
+											"line": 30,
+											"column": 46
 										},
 										"input": {
 											"file": "styled-components-nesting3.js"
 										},
 										"end": {
-											"line": 28,
-											"column": 731
+											"line": 30,
+											"column": 57
 										}
 									},
 									"prop": "color",
@@ -853,8 +853,8 @@
 									"file": "styled-components-nesting3.js"
 								},
 								"start": {
-									"line": 28,
-									"column": 720
+									"line": 30,
+									"column": 46
 								},
 								"inline": false,
 								"lang": "css"

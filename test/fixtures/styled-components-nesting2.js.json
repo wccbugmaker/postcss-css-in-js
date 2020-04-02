@@ -82,14 +82,14 @@
 									"type": "decl",
 									"source": {
 										"start": {
-											"line": 3,
+											"line": 5,
 											"column": 3
 										},
 										"input": {
 											"file": "styled-components-nesting2.js"
 										},
 										"end": {
-											"line": 3,
+											"line": 5,
 											"column": 17
 										}
 									},
@@ -102,8 +102,8 @@
 									"file": "styled-components-nesting2.js"
 								},
 								"start": {
-									"line": 2,
-									"column": 124
+									"line": 4,
+									"column": 8
 								},
 								"inline": false,
 								"lang": "css"
