@@ -14,22 +14,16 @@ env:
 
 jobs:
   test:
-    name: Test on Node.js ${{ matrix.node }} and ${{ matrix.os }}
+    name: Test on Node.js ${{ matrix.node }}
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
         node: [10, 12]
-        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - name: Set git to use LF
-        run: |
-          git config --global core.autocrlf false
-          git config --global core.eol lf
-
       - uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node }}
