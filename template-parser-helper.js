@@ -1,5 +1,8 @@
 "use strict";
 const Literal = require("./literal");
+const postcssParse = require("postcss/lib/parse");
+const Input = require("postcss/lib/input");
+const reNewLine = /(?:\r?\n|\r)/gm;
 const isLiteral = token => token[0] === "word" && /^\$\{[\s\S]*\}$/.test(token[1]);
 function literal (start) {
 	if (!isLiteral(start)) {
@@ -33,6 +36,28 @@ function literal (start) {
 
 	this.init(node, start[2], start[3]);
 
+	const input = this.input;
+	if (input.templateLiteralStyles) {
+		const offset = input.quasis[0].start;
+		const nodeIndex = getNodeIndex(node, input);
+		const start = offset + nodeIndex;
+		const end = start + node.text.length;
+		const templateLiteralStyles = input.templateLiteralStyles.filter(style =>
+			style.startIndex <= end && start < style.endIndex
+		);
+		if (templateLiteralStyles.length) {
+			const nodes = parseTemplateLiteralStyles(
+				templateLiteralStyles,
+				input,
+				[nodeIndex, nodeIndex + node.text.length]
+			);
+			if (nodes.length) {
+				node.nodes = nodes;
+				nodes.forEach(n => n.parent = node);
+			}
+		}
+	}
+
 	return node;
 }
 
@@ -50,3 +75,138 @@ module.exports = {
 	freeSemicolon: freeSemicolon,
 	literal: literal,
 };
+
+function parseTemplateLiteralStyles(styles, input, range) {
+	const offset = input.quasis[0].start;
+	const source = input.css;
+	const parseStyle = docFixer(offset, source, input.parseOptions);
+
+	const nodes = [];
+	let index = range[0];
+	styles.sort((a, b) => (
+		a.startIndex - b.startIndex
+	)).forEach(style => {
+		const root = parseStyle(style);
+		if (!root || !root.nodes.length) {
+			return
+		}
+		root.raws.beforeStart = source.slice(index, style.startIndex - offset);
+		root.raws.afterEnd = '';
+		if (style.endIndex) {
+			index = style.endIndex - offset;
+		} else {
+			index = style.startIndex - offset + (style.content || root.source.input.css).length;
+		}
+		nodes.push(root);
+	})
+	if (nodes.length) {
+		nodes[nodes.length - 1].raws.afterEnd = source.slice(index, range[1]);
+	}
+	return nodes;
+}
+
+class LocalFixer {
+	constructor (offset, lines, style, templateParse) {
+		const startIndex = style.startIndex - offset
+		let line = 0;
+		let column = startIndex;
+		lines.some((lineEndIndex, lineNumber) => {
+			if (lineEndIndex >= startIndex) {
+				line = lineNumber--;
+				if (lineNumber in lines) {
+					column = startIndex - lines[lineNumber] - 1;
+				}
+				return true;
+			}
+		});
+
+		this.line = line;
+		this.column = column;
+		this.style = style;
+		this.templateParse = templateParse
+	}
+	object (object) {
+		if (object) {
+			if (object.line === 1) {
+				object.column += this.column;
+			}
+			object.line += this.line;
+		}
+	}
+	node (node) {
+		this.object(node.source.start);
+		this.object(node.source.end);
+	}
+	root (root) {
+		this.node(root);
+		root.walk(node => {
+			this.node(node);
+		});
+	}
+	error (error) {
+		if (error && error.name === "CssSyntaxError") {
+			this.object(error);
+			this.object(error.input);
+			error.message = error.message.replace(/:\d+:\d+:/, ":" + error.line + ":" + error.column + ":");
+		}
+		return error;
+	}
+	parse (opts) {
+		const style = this.style;
+		const syntax = style.syntax;
+		let root = style.root;
+		try {
+			root = this.templateParse(style.content, Object.assign({}, opts, {
+				map: false,
+			}, style.opts));
+		} catch (error) {
+			if (style.ignoreErrors) {
+				return;
+			} else if (!style.skipConvert) {
+				this.error(error);
+			}
+			throw error;
+		}
+		if (!style.skipConvert) {
+			this.root(root);
+		}
+
+		root.source.inline = Boolean(style.inline);
+		root.source.lang = style.lang;
+		root.source.syntax = syntax;
+		return root;
+	}
+}
+
+function docFixer (offset, source, opts) {
+	let match;
+	const lines = [];
+	reNewLine.lastIndex = 0;
+	while ((match = reNewLine.exec(source))) {
+		lines.push(match.index);
+	}
+	lines.push(source.length);
+	return function parseStyle (style) {
+		const parse = style.syntax ? style.syntax.parse : postcssParse
+		return new LocalFixer(offset, lines, style, parse).parse(opts);
+	};
+}
+
+function getNodeIndex(node, input) {
+	const source = input.css
+	let match;
+	let line = 1
+	let lastIndex = -1
+	reNewLine.lastIndex = 0;
+	while ((match = reNewLine.exec(source))) {
+		if (line === node.source.start.line) {
+			return lastIndex + node.source.start.column
+		}
+		lastIndex = match.index
+		line++
+	}
+	if (line === node.source.start.line) {
+		return lastIndex + node.source.start.column
+	}
+	return source.length
+}

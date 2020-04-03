@@ -337,7 +337,7 @@ function literalParser (source, opts, styles) {
 	traverse(ast, visitor);
 	jobs.forEach(job => job());
 
-	objLiteral = Array.from(objLiteral).map(endNode => {
+	const objLiteralStyles = Array.from(objLiteral).map(endNode => {
 		const objectSyntax = require("./object-syntax");
 		let startNode = endNode;
 		if (startNode.leadingComments && startNode.leadingComments.length) {
@@ -361,11 +361,14 @@ function literalParser (source, opts, styles) {
 		};
 	});
 
-	tplLiteral = Array.from(tplLiteral).filter(node => (
-		objLiteral.every(style => (
-			node.start > style.endIndex || node.end < style.startIndex
-		))
-	)).map(node => {
+	const tplLiteralStyles = [];
+	Array.from(tplLiteral).forEach(node => {
+		if (objLiteralStyles.some(style => (
+			style.startIndex <= node.end && node.start < style.endIndex
+		))) {
+			return
+		}
+
 		const quasis = node.quasis.map(node => ({
 			start: node.start,
 			end: node.end,
@@ -376,18 +379,45 @@ function literalParser (source, opts, styles) {
 			content: getTemplate(node, source),
 		};
 		if (node.expressions.length) {
+			const expressions = node.expressions.map(node => ({
+				start: node.start,
+				end: node.end,
+			}));
 			style.syntax = loadSyntax(opts, __dirname);
 			style.lang = "template-literal";
 			style.opts = {
 				quasis: quasis,
+				expressions: expressions,
 			};
 		} else {
 			style.lang = "css";
 		}
-		return style;
+
+		let parent = null;
+		let targetStyles = tplLiteralStyles;
+		while (targetStyles) {
+			const target = targetStyles.find(targetStyle =>
+				targetStyle.opts && targetStyle.opts.expressions.some(expr =>
+					expr.start <= style.startIndex && style.endIndex < expr.end
+				)
+			);
+			if (target) {
+				parent = target;
+				targetStyles = target.opts.templateLiteralStyles;
+			} else {
+				break
+			}
+		}
+
+		if (parent) {
+			const templateLiteralStyles = parent.opts.templateLiteralStyles || (parent.opts.templateLiteralStyles = []);
+			templateLiteralStyles.push(style);
+		} else {
+			tplLiteralStyles.push(style);
+		}
 	});
 
-	return (styles || []).concat(objLiteral).concat(tplLiteral);
+	return (styles || []).concat(objLiteralStyles).concat(tplLiteralStyles);
 };
 
 module.exports = literalParser;
