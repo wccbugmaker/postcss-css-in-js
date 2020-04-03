@@ -1,11 +1,6 @@
-PostCSS JSX Syntax
-====
+# PostCSS CSS-in-JS Syntax
 
-[![NPM version](https://img.shields.io/npm/v/postcss-jsx.svg?style=flat-square)](https://www.npmjs.com/package/postcss-jsx)
-[![Travis](https://img.shields.io/travis/gucong3000/postcss-jsx.svg)](https://travis-ci.org/gucong3000/postcss-jsx)
-[![Travis](https://img.shields.io/travis/gucong3000/postcss-syntaxes.svg?label=integration)](https://travis-ci.org/gucong3000/postcss-syntaxes)
-[![Codecov](https://img.shields.io/codecov/c/github/gucong3000/postcss-jsx.svg)](https://codecov.io/gh/gucong3000/postcss-jsx)
-[![David](https://img.shields.io/david/gucong3000/postcss-jsx.svg)](https://david-dm.org/gucong3000/postcss-jsx)
+[![NPM version](https://img.shields.io/npm/v/@stylelint/postcss-css-in-js.svg)](https://www.npmjs.org/package/@stylelint/postcss-css-in-js) [![Build Status](https://github.com/stylelint/postcss-css-in-js/workflows/CI/badge.svg)](https://github.com/stylelint/postcss-css-in-js/actions)
 
 <img align="right" width="95" height="95"
 	title="Philosopher’s stone, logo of PostCSS"
@@ -39,48 +34,53 @@ PostCSS JSX Syntax
 First thing's first, install the module:
 
 ```
-npm install postcss-syntax postcss-jsx --save-dev
+npm install postcss-syntax @stylelint/postcss-css-in-js --save-dev
 ```
 
 ## Use Cases
 
 ```js
-const postcss = require('postcss');
-const stylelint = require('stylelint');
-const syntax = require('postcss-syntax');
-postcss([stylelint({ fix: true })]).process(source, { syntax: syntax }).then(function (result) {
-	// An alias for the result.css property. Use it with syntaxes that generate non-CSS output.
-	result.content
-});
+const postcss = require("postcss");
+const stylelint = require("stylelint");
+const syntax = require("postcss-syntax");
+postcss([stylelint({ fix: true })])
+  .process(source, { syntax: syntax })
+  .then(function(result) {
+    // An alias for the result.css property. Use it with syntaxes that generate non-CSS output.
+    result.content;
+  });
 ```
 
 input:
+
 ```javascript
-import glm from 'glamorous';
+import glm from "glamorous";
 const Component1 = glm.a({
-	flexDirectionn: 'row',
-	display: 'inline-block',
-	color: '#fff',
+  flexDirectionn: "row",
+  display: "inline-block",
+  color: "#fff"
 });
 ```
 
 output:
+
 ```javascript
-import glm from 'glamorous';
+import glm from "glamorous";
 const Component1 = glm.a({
-	color: '#fff',
-	display: 'inline-block',
-	flexDirectionn: 'row',
+  color: "#fff",
+  display: "inline-block",
+  flexDirectionn: "row"
 });
 ```
 
 ## Advanced Use Cases
 
 Add support for more `css-in-js` package:
+
 ```js
-const syntax = require('postcss-syntax')({
-	"i-css": (index, namespace) => namespace[index + 1] === "addStyles",
-	"styled-components": true,
+const syntax = require("postcss-syntax")({
+  "i-css": (index, namespace) => namespace[index + 1] === "addStyles",
+  "styled-components": true
 });
 ```
 
