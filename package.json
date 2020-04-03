@@ -1,11 +1,8 @@
 {
-  "name": "postcss-jsx",
+  "name": "@stylelint/postcss-css-in-js",
   "version": "0.36.4",
   "description": "PostCSS syntax for parsing CSS in JS literals",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gucong3000/postcss-jsx.git"
-  },
+  "repository": "stylelint/postcss-css-in-js",
   "keywords": [
     "postcss",
     "syntax",
@@ -24,10 +21,6 @@
   ],
   "author": "gucong3000",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gucong3000/postcss-jsx/issues"
-  },
-  "homepage": "https://github.com/gucong3000/postcss-jsx#readme",
   "nyc": {
     "reporter": [
       "lcov",
