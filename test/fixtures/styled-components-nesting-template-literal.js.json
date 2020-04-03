@@ -1,0 +1,147 @@
+{
+	"raws": {},
+	"type": "root",
+	"nodes": [
+		{
+			"raws": {
+				"semicolon": false,
+				"after": "\n"
+			},
+			"type": "root",
+			"nodes": [
+				{
+					"raws": {
+						"before": "\n\t",
+						"between": ": "
+					},
+					"type": "decl",
+					"source": {
+						"start": {
+							"line": 3,
+							"column": 2
+						},
+						"input": {
+							"file": "styled-components-nesting-template-literal.js",
+							"quasis": [
+								{
+									"start": 74,
+									"end": 92
+								},
+								{
+									"start": 128,
+									"end": 130
+								},
+								{
+									"start": 170,
+									"end": 171
+								}
+							]
+						},
+						"end": {
+							"line": 3,
+							"column": 15
+						}
+					},
+					"prop": "padding",
+					"value": "10px"
+				},
+				{
+					"raws": {
+						"before": "\n\t"
+					},
+					"text": "${(props) => `\n\t\tcolor: #b02d00;\n\t`}",
+					"type": "literal",
+					"source": {
+						"start": {
+							"line": 4,
+							"column": 2
+						},
+						"input": {
+							"file": "styled-components-nesting-template-literal.js",
+							"quasis": [
+								{
+									"start": 74,
+									"end": 92
+								},
+								{
+									"start": 128,
+									"end": 130
+								},
+								{
+									"start": 170,
+									"end": 171
+								}
+							]
+						}
+					}
+				},
+				{
+					"raws": {
+						"before": "\n\t"
+					},
+					"text": "${(props2) => `\n\t\tborder-color: red;\n\t`}",
+					"type": "literal",
+					"source": {
+						"start": {
+							"line": 7,
+							"column": 2
+						},
+						"input": {
+							"file": "styled-components-nesting-template-literal.js",
+							"quasis": [
+								{
+									"start": 74,
+									"end": 92
+								},
+								{
+									"start": 128,
+									"end": 130
+								},
+								{
+									"start": 170,
+									"end": 171
+								}
+							]
+						}
+					}
+				}
+			],
+			"source": {
+				"input": {
+					"file": "styled-components-nesting-template-literal.js",
+					"quasis": [
+						{
+							"start": 74,
+							"end": 92
+						},
+						{
+							"start": 128,
+							"end": 130
+						},
+						{
+							"start": 170,
+							"end": 171
+						}
+					]
+				},
+				"start": {
+					"line": 2,
+					"column": 26
+				},
+				"inline": false,
+				"lang": "template-literal",
+				"syntax": {}
+			}
+		}
+	],
+	"source": {
+		"input": {
+			"file": "styled-components-nesting-template-literal.js"
+		},
+		"start": {
+			"line": 1,
+			"column": 1
+		},
+		"lang": "jsx"
+	}
+}

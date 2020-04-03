@@ -41,6 +41,7 @@ describe("should support for each CSS in JS package", () => {
 		"styled-components-nesting2.js",
 		"styled-components-nesting3.js",
 		"styled-components-nesting-nesting.js",
+		"styled-components-nesting-template-literal.js",
 		"styled-components.js",
 		"styled-opts.mjs",
 		"styled-props.jsx",
