@@ -40,7 +40,6 @@
     "lint:formatting": "prettier . --check",
     "lint:js": "eslint .",
     "lint": "npm-run-all --parallel lint:*",
-    "pretest": "npm run lint",
     "mocha": "mocha --no-timeouts",
     "test": "nyc npm run mocha",
     "watch": "mocha --watch",
