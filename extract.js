@@ -206,7 +206,7 @@ function literalParser(source, opts, styles) {
 			nameSpace
 				.shift()
 				.replace(/^\W+/, '')
-				.split(/[/\\]+/g)
+				.split(/[/\\]+/g),
 		);
 
 		if (types.isIdentifier(id)) {
@@ -432,8 +432,8 @@ function literalParser(source, opts, styles) {
 				(targetStyle) =>
 					targetStyle.opts &&
 					targetStyle.opts.expressions.some(
-						(expr) => expr.start <= style.startIndex && style.endIndex < expr.end
-					)
+						(expr) => expr.start <= style.startIndex && style.endIndex < expr.end,
+					),
 			);
 
 			if (target) {

@@ -36,12 +36,14 @@
     ]
   },
   "scripts": {
+    "format": "prettier . --write",
     "lint:formatting": "prettier . --check",
     "lint:js": "eslint .",
     "lint": "npm-run-all --parallel lint:*",
     "pretest": "npm run lint",
     "mocha": "mocha --no-timeouts",
     "test": "nyc npm run mocha",
+    "watch": "mocha --watch",
     "debug": "npm run mocha -- --inspect-brk",
     "release": "np"
   },
@@ -85,6 +87,9 @@
     "*.{js,md,yml}": "prettier --write"
   },
   "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2019
+    },
     "extends": [
       "stylelint",
       "prettier"
