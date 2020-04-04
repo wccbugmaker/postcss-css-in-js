@@ -1,11 +1,12 @@
-"use strict";
-const expect = require("chai").expect;
-const syntax = require("../");
-const fs = require("fs");
+'use strict';
 
-describe("styled-components", () => {
-	it("basic", () => {
-		const file = require.resolve("./fixtures/styled-components");
+const expect = require('chai').expect;
+const fs = require('fs');
+const syntax = require('../');
+
+describe('styled-components', () => {
+	it('basic', () => {
+		const file = require.resolve('./fixtures/styled-components');
 		let code = fs.readFileSync(file);
 
 		const document = syntax.parse(code, {
@@ -14,67 +15,75 @@ describe("styled-components", () => {
 
 		code = code.toString();
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 
 		expect(document.nodes).to.have.lengthOf(1);
 		expect(document.first.nodes).to.have.lengthOf(8);
 
-		const lines = code.match(/^.+$/gm).slice(3).map(line => (line.replace(/^\s*(.+?);?\s*$/, "$1")));
+		const lines = code
+			.match(/^.+$/gm)
+			.slice(3)
+			.map((line) => line.replace(/^\s*(.+?);?\s*$/, '$1'));
+
 		document.first.nodes.forEach((decl, i) => {
 			if (i) {
-				expect(decl).to.have.property("type", "decl");
+				expect(decl).to.have.property('type', 'decl');
 			} else {
-				expect(decl).to.have.property("type", "comment");
+				expect(decl).to.have.property('type', 'comment');
 			}
+
 			expect(decl.toString()).to.equal(lines[i]);
 		});
 	});
 
-	it("interpolation with css template literal", () => {
+	it('interpolation with css template literal', () => {
 		const code = [
 			"import styled, { css } from 'styled-components';",
 
-			"const Message = styled.p`",
-			"	padding: 10px;",
+			'const Message = styled.p`',
+			'	padding: 10px;',
 
-			"	${css`",
-			"		color: #b02d00;",
-			"	`}",
-			"`;",
-		].join("\n");
+			'	${css`',
+			'		color: #b02d00;',
+			'	`}',
+			'`;',
+		].join('\n');
 		const document = syntax.parse(code, {
 			from: undefined,
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(1);
 	});
 
-	it("interpolation with two css template literals", () => {
+	it('interpolation with two css template literals', () => {
 		const code = [
 			"import styled, { css } from 'styled-components';",
 
-			"const Message = styled.p`",
-			"	padding: 10px;",
+			'const Message = styled.p`',
+			'	padding: 10px;',
 
-			"	${(props) => css`",
-			"		color: #b02d00;",
-			"	`}",
+			'	${(props) => css`',
+			'		color: #b02d00;',
+			'	`}',
 
-			"	${(props2) => css`",
-			"		border-color: red;",
-			"	`}",
-			"`;",
-		].join("\n");
+			'	${(props2) => css`',
+			'		border-color: red;',
+			'	`}',
+			'`;',
+		].join('\n');
 		const document = syntax.parse(code, {
 			from: undefined,
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(1);
 	});
 
-	it("empty template literal", () => {
+	it('empty template literal', () => {
+		// prettier-ignore
 		const code = [
 			"function test() {",
 			"  alert`debug`",
@@ -83,52 +92,58 @@ describe("styled-components", () => {
 			"",
 		].join("\n");
 		const document = syntax.parse(code, {
-			from: "empty_template_literal.js",
+			from: 'empty_template_literal.js',
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(0);
 	});
 
-	it("skip javascript syntax error", () => {
-		const code = "\\`";
+	it('skip javascript syntax error', () => {
+		const code = '\\`';
 		const document = syntax.parse(code, {
-			from: "syntax_error.js",
+			from: 'syntax_error.js',
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(0);
 	});
 
-	it("skip @babel/traverse error", () => {
-		const code = "let a;let a";
+	it('skip @babel/traverse error', () => {
+		const code = 'let a;let a';
 		const document = syntax.parse(code, {
-			from: "traverse_error.js",
+			from: 'traverse_error.js',
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(0);
 	});
 
-	it("illegal template literal", () => {
+	it('illegal template literal', () => {
+		// prettier-ignore
 		const code = [
 			"const styled = require(\"styled-components\");",
 			"styled.div`$\n{display: block}\n${g} {}`",
 		].join("\n");
 		const document = syntax.parse(code, {
-			from: "illegal_template_literal.js",
+			from: 'illegal_template_literal.js',
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(1);
 		expect(document.first.nodes).to.have.lengthOf(2);
-		expect(document.first.first).have.property("type", "rule");
-		expect(document.first.first).have.property("selector", "$");
-		expect(document.last.last).have.property("type", "rule");
-		expect(document.last.last).have.property("selector", "${g}");
+		expect(document.first.first).have.property('type', 'rule');
+		expect(document.first.first).have.property('selector', '$');
+		expect(document.last.last).have.property('type', 'rule');
+		expect(document.last.last).have.property('selector', '${g}');
 	});
 
-	it("styled.img", () => {
+	it('styled.img', () => {
+		// prettier-ignore
 		const code = [
 			"const styled = require(\"styled-components\");",
 			"const Image1 = styled.img.attrs({ src: 'url' })`",
@@ -138,12 +153,14 @@ describe("styled-components", () => {
 			"`;",
 		].join("\n");
 		const root = syntax.parse(code, {
-			from: "styled.img.js",
+			from: 'styled.img.js',
 		});
+
 		expect(root.toString()).to.equal(code);
 	});
 
-	it("throw CSS syntax error", () => {
+	it('throw CSS syntax error', () => {
+		// prettier-ignore
 		const code = [
 			"const styled = require(\"styled-components\");",
 			"styled.div`a{`;",
@@ -151,107 +168,125 @@ describe("styled-components", () => {
 
 		expect(() => {
 			syntax.parse(code, {
-				from: "css_syntax_error.js",
+				from: 'css_syntax_error.js',
 			});
-		}).to.throw("css_syntax_error.js:2:12: Unclosed block");
+		}).to.throw('css_syntax_error.js:2:12: Unclosed block');
 	});
 
-	it("not skip empty template literal", () => {
+	it('not skip empty template literal', () => {
+		// prettier-ignore
 		const code = [
 			"const styled = require(\"styled-components\");",
 			"styled.div``;",
 		].join("\n");
 		const root = syntax.parse(code, {
-			from: "empty_template_literal.js",
+			from: 'empty_template_literal.js',
 		});
+
 		expect(root.toString()).to.equal(code);
 		expect(root.nodes).to.have.lengthOf(1);
 	});
 
-	it("fix CSS syntax error", () => {
+	it('fix CSS syntax error', () => {
+		// prettier-ignore
 		const code = [
 			"const styled = require(\"styled-components\");",
 			"styled.div`a{`;",
 		].join("\n");
 		const document = syntax({
-			css: "safe-parser",
+			css: 'safe-parser',
 		}).parse(code, {
-			from: "postcss-safe-parser.js",
+			from: 'postcss-safe-parser.js',
 		});
+
+		// prettier-ignore
 		expect(document.toString()).to.equal([
 			"const styled = require(\"styled-components\");",
 			"styled.div`a{}`;",
 		].join("\n"));
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(1);
 		expect(document.first.nodes).to.have.lengthOf(1);
-		expect(document.first.first).have.property("type", "rule");
-		expect(document.first.first).have.property("selector", "a");
+		expect(document.first.first).have.property('type', 'rule');
+		expect(document.first.first).have.property('selector', 'a');
 	});
 
-	it("fix styled syntax error", () => {
+	it('fix styled syntax error', () => {
+		// prettier-ignore
 		const code = [
 			"const styled = require(\"styled-components\");",
 			"styled.div`${ a } {`",
 		].join("\n");
 		const document = syntax({
-			css: "safe-parser",
+			css: 'safe-parser',
 		}).parse(code, {
-			from: "styled-safe-parse.js",
+			from: 'styled-safe-parse.js',
 		});
+
+		// prettier-ignore
 		expect(document.toString()).to.equal([
 			"const styled = require(\"styled-components\");",
 			"styled.div`${ a } {}`",
 		].join("\n"));
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(1);
 		expect(document.first.nodes).to.have.lengthOf(1);
-		expect(document.first.first).have.property("type", "rule");
-		expect(document.first.first).have.property("selector", "${ a }");
+		expect(document.first.first).have.property('type', 'rule');
+		expect(document.first.first).have.property('selector', '${ a }');
 	});
 
-	it("template literal in prop", () => {
+	it('template literal in prop', () => {
+		// prettier-ignore
 		const code = [
 			"const styled = require(\"styled-components\");",
 			"styled.div`margin-${/* sc-custom 'left' */ rtlSwitch}: 12.5px;`",
 		].join("\n");
 		const document = syntax.parse(code, {
-			from: "template_literal_in_prop.js",
+			from: 'template_literal_in_prop.js',
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(1);
-		expect(document.first.first).to.haveOwnProperty("prop", "margin-${/* sc-custom 'left' */ rtlSwitch}");
+		expect(document.first.first).to.haveOwnProperty(
+			'prop',
+			"margin-${/* sc-custom 'left' */ rtlSwitch}"
+		);
 	});
 
-	it("lazy assignment", () => {
+	it('lazy assignment', () => {
+		// prettier-ignore
 		const code = [
 			"let myDiv;",
 			"myDiv = require(\"styled-components\").div;",
 			"myDiv`a{}`;",
 		].join("\n");
 		const document = syntax.parse(code, {
-			from: "lazy_assign.js",
+			from: 'lazy_assign.js',
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(1);
 	});
 
-	it("lazy assignment without init", () => {
+	it('lazy assignment without init', () => {
+		// prettier-ignore
 		const code = [
 			"myDiv = require(\"styled-components\").div;",
 			"myDiv`a{}`;",
 		].join("\n");
 		const document = syntax.parse(code, {
-			from: "lazy_assign_no_init.js",
+			from: 'lazy_assign_no_init.js',
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(1);
 	});
 
-	it("array destructuring assignment", () => {
+	it('array destructuring assignment', () => {
+		// prettier-ignore
 		const code = [
 			"const [",
 			"\tstyledDiv,",
@@ -260,14 +295,16 @@ describe("styled-components", () => {
 			"styledDiv`a{}`;",
 		].join("\n");
 		const document = syntax.parse(code, {
-			from: "arr_destructuring.js",
+			from: 'arr_destructuring.js',
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(1);
 	});
 
-	it("object destructuring assignment", () => {
+	it('object destructuring assignment', () => {
+		// prettier-ignore
 		const code = [
 			"const {",
 			"\t// commit",
@@ -280,10 +317,11 @@ describe("styled-components", () => {
 			"a`a{}`;",
 		].join("\n");
 		const document = syntax.parse(code, {
-			from: "obj_destructuring.js",
+			from: 'obj_destructuring.js',
 		});
+
 		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty("lang", "jsx");
+		expect(document.source).to.haveOwnProperty('lang', 'jsx');
 		expect(document.nodes).to.have.lengthOf(3);
 	});
 });

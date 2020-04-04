@@ -2,13 +2,17 @@
 *.pid
 *.seed
 .editorconfig
+.eslintignore
 .eslintrc*
 .git
+.github
 .gitignore
 .grunt
 .lock-wscript
 .node_repl_history
 .nyc_output
+.prettierrc.js
+.prettierignore
 .stylelintrc*
 .travis.yml
 .vscode
