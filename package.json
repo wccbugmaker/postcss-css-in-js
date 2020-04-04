@@ -39,6 +39,7 @@
     "lint:formatting": "prettier . --check",
     "lint:js": "eslint .",
     "lint": "npm-run-all --parallel lint:*",
+    "pretest": "npm run lint",
     "mocha": "mocha --no-timeouts",
     "test": "nyc npm run mocha",
     "debug": "npm run mocha -- --inspect-brk",
@@ -82,5 +83,19 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,md,yml}": "prettier --write"
-  }
+  },
+  "eslintConfig": {
+    "extends": [
+      "stylelint",
+      "prettier"
+    ],
+    "rules": {
+      "jest/valid-expect": "off"
+    }
+  },
+  "eslintIgnore": [
+    "test/fixtures/*",
+    "coverage/**",
+    ".nyc_output/**"
+  ]
 }
