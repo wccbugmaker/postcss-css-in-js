@@ -87,9 +87,6 @@
     "*.{js,md,yml}": "prettier --write"
   },
   "eslintConfig": {
-    "parserOptions": {
-      "ecmaVersion": 2019
-    },
     "extends": [
       "stylelint",
       "prettier"

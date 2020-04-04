@@ -49,7 +49,7 @@ describe('camelCase', () => {
 		symbols.forEach((symbol) => {
 			it(JSON.stringify(symbol), () => {
 				expect(camelCase(testCases.map((testCase) => testCase.unCamel).join(symbol))).to.equal(
-					testCases.map((testCase) => testCase.camel).join(symbol),
+					testCases.map((testCase) => testCase.camel).join(symbol)
 				);
 			});
 		});
@@ -66,7 +66,7 @@ describe('unCamelCase', () => {
 		symbols.forEach((symbol) => {
 			it(JSON.stringify(symbol), () => {
 				expect(unCamelCase(testCases.map((testCase) => testCase.camel).join(symbol))).to.equal(
-					testCases.map((testCase) => testCase.unCamel).join(symbol),
+					testCases.map((testCase) => testCase.unCamel).join(symbol)
 				);
 			});
 		});

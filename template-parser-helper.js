@@ -48,7 +48,7 @@ function literal(start) {
 		const start = offset + nodeIndex;
 		const end = start + node.text.length;
 		const templateLiteralStyles = input.templateLiteralStyles.filter(
-			(style) => style.startIndex <= end && start < style.endIndex,
+			(style) => style.startIndex <= end && start < style.endIndex
 		);
 
 		if (templateLiteralStyles.length) {
@@ -167,7 +167,7 @@ class LocalFixer {
 			this.object(error.input);
 			error.message = error.message.replace(
 				/:\d+:\d+:/,
-				':' + error.line + ':' + error.column + ':',
+				':' + error.line + ':' + error.column + ':'
 			);
 		}
 
@@ -187,8 +187,8 @@ class LocalFixer {
 					{
 						map: false,
 					},
-					style.opts,
-				),
+					style.opts
+				)
 			);
 		} catch (error) {
 			if (style.ignoreErrors) {

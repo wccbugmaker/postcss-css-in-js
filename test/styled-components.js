@@ -250,7 +250,7 @@ describe('styled-components', () => {
 		expect(document.nodes).to.have.lengthOf(1);
 		expect(document.first.first).to.haveOwnProperty(
 			'prop',
-			"margin-${/* sc-custom 'left' */ rtlSwitch}",
+			"margin-${/* sc-custom 'left' */ rtlSwitch}"
 		);
 	});
 
