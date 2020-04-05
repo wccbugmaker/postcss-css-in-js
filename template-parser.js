@@ -1,17 +1,19 @@
-"use strict";
-const Parser = require("postcss/lib/parser");
-const templateTokenize = require("./template-tokenize");
-const helper = require("./template-parser-helper");
+'use strict';
+
+const helper = require('./template-parser-helper');
+const Parser = require('postcss/lib/parser');
+const templateTokenize = require('./template-tokenize');
 
 class TemplateParser extends Parser {
-	createTokenizer () {
+	createTokenizer() {
 		this.tokenizer = templateTokenize(this.input);
 	}
-	other () {
+	other() {
 		const args = arguments;
+
 		return helper.literal.apply(this, args) || super.other.apply(this, args);
 	}
-	freeSemicolon () {
+	freeSemicolon() {
 		return helper.freeSemicolon.apply(this, arguments);
 	}
 }

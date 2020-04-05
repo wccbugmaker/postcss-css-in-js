@@ -1,6 +1,7 @@
-"use strict";
-const stringify = require("./object-stringify");
-const parse = require("./object-parse");
+'use strict';
+
+const parse = require('./object-parse');
+const stringify = require('./object-stringify');
 
 const syntax = {
 	parse,

@@ -1,9 +1,10 @@
-"use strict";
-const expect = require("chai").expect;
-const syntax = require("../");
+'use strict';
 
-describe("react", () => {
-	it("first line indentation handle", () => {
+const expect = require('chai').expect;
+const syntax = require('../');
+
+describe('react', () => {
+	it('first line indentation handle', () => {
 		const code = `
 export default <img style=
 	{
@@ -15,7 +16,7 @@ export default <img style=
 `;
 
 		const document = syntax.parse(code, {
-			from: "before.js",
+			from: 'before.js',
 		});
 
 		expect(document.toString(syntax)).to.equal(code);

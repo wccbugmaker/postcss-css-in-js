@@ -1,7 +1,9 @@
-"use strict";
-const ObjectStringifier = require("./object-stringifier");
+'use strict';
 
-module.exports = function objectStringify (node, builder) {
+const ObjectStringifier = require('./object-stringifier');
+
+module.exports = function objectStringify(node, builder) {
 	const str = new ObjectStringifier(builder);
+
 	str.stringify(node);
 };
