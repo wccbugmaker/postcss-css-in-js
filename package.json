@@ -3,6 +3,10 @@
   "version": "0.36.4",
   "description": "PostCSS syntax for parsing CSS in JS literals",
   "repository": "stylelint/postcss-css-in-js",
+  "main": "index.js",
+  "files": [
+    "*.js"
+  ],
   "keywords": [
     "postcss",
     "syntax",
