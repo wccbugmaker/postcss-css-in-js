@@ -2,8 +2,8 @@
 
 ## 0.37.0
 
-- Fixed: babel configuration conflict when using TypeScript ([#2](https://github.com/stylelint/stylelint/pull/2)).
-- Fixed: parsing/stringifying for nested tagged template literals ([#17](https://github.com/stylelint/stylelint/pull/17)).
+- Fixed: babel configuration conflict when using TypeScript ([#2](https://github.com/stylelint/postcss-css-in-js/pull/2)).
+- Fixed: parsing/stringifying for nested tagged template literals ([#17](https://github.com/stylelint/postcss-css-in-js/pull/17)).
 
 ## Previous changes
 
