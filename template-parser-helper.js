@@ -86,7 +86,14 @@ module.exports = {
 function parseTemplateLiteralStyles(styles, input, range) {
 	const offset = input.quasis[0].start;
 	const source = input.css;
-	const parseStyle = docFixer(offset, source, input.parseOptions);
+
+	const opts = Object.assign({},input.parseOptions)
+
+	delete	opts.templateLiteralStyles
+	delete	opts.expressions
+	delete	opts.quasis
+
+	const parseStyle = docFixer(offset, source, opts);
 
 	const nodes = [];
 	let index = range[0];

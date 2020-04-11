@@ -42,6 +42,7 @@ describe('should support for each CSS in JS package', () => {
 		'lit-css.mjs',
 		'react-emotion.jsx',
 		'react-native.mjs',
+		'styled-components-nesting-expr.js',
 		'styled-components-nesting.js',
 		'styled-components-nesting2.js',
 		'styled-components-nesting3.js',
