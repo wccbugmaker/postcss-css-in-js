@@ -62,7 +62,7 @@ describe('CSS in JS', () => {
 			`,
 				{
 					from: '/fixtures/glamorous-atRule.jsx',
-				}
+				},
 			).first.first.first;
 
 			decl.raws.prop.raw = 'WebkitBorderRadius';
@@ -82,7 +82,7 @@ describe('CSS in JS', () => {
 			`,
 				{
 					from: '/fixtures/glamorous-atRule.jsx',
-				}
+				},
 			).first.first.first;
 
 			atRule.raws.params.raw = "(minWidth: ' + minWidth + ')";

@@ -25,7 +25,7 @@ describe('template literals', () => {
 			expect(decl).have.property('prop', 'border-bottom');
 			expect(decl).have.property(
 				'value',
-				'${(props) => (props.border ? `1px solid ${color}` : "0")}'
+				'${(props) => (props.border ? `1px solid ${color}` : "0")}',
 			);
 		});
 	});
@@ -55,7 +55,7 @@ describe('template literals', () => {
 					"${(props) =>",
 					"(props.status === \"signed\" && \"red\") ||",
 					"\"blue\"}",
-				].join("\n\t\t")
+				].join("\n\t\t"),
 			);
 		});
 	});
@@ -149,7 +149,7 @@ describe('template literals', () => {
 							? `${/\bprefix\b/.test(rule.selector) ? 'prefix-' : ''}\${prop}${
 									/\bsuffix\b/.test(rule.selector) ? '-suffix' : ''
 							  }`
-							: 'prop'
+							: 'prop',
 					);
 					expect(decl).to.have.property(
 						'value',
@@ -157,7 +157,7 @@ describe('template literals', () => {
 							? `${/\bprefix\b/.test(rule.selector) ? 'prefix-' : ''}\${value}${
 									/\bsuffix\b/.test(rule.selector) ? '-suffix' : ''
 							  }`
-							: 'value'
+							: 'value',
 					);
 				});
 			});
