@@ -1,0 +1,200 @@
+{
+	"raws": {},
+	"type": "root",
+	"nodes": [
+		{
+			"raws": {
+				"semicolon": false,
+				"after": "\n"
+			},
+			"type": "root",
+			"nodes": [
+				{
+					"raws": {
+						"before": "\n  ",
+						"between": ": "
+					},
+					"type": "decl",
+					"source": {
+						"start": {
+							"line": 3,
+							"column": 3
+						},
+						"input": {
+							"file": "styled-components-nesting-expr.js",
+							"quasis": [
+								{
+									"start": 84,
+									"end": 105
+								},
+								{
+									"start": 165,
+									"end": 166
+								}
+							]
+						},
+						"end": {
+							"line": 3,
+							"column": 16
+						}
+					},
+					"prop": "margin",
+					"value": "8px 0"
+				},
+				{
+					"raws": {
+						"before": "\n\n  "
+					},
+					"text": "${() =>\n    css`\n      div {\n        ${expr};\n      }\n    `}",
+					"type": "literal",
+					"source": {
+						"start": {
+							"line": 5,
+							"column": 3
+						},
+						"input": {
+							"file": "styled-components-nesting-expr.js",
+							"quasis": [
+								{
+									"start": 84,
+									"end": 105
+								},
+								{
+									"start": 165,
+									"end": 166
+								}
+							]
+						}
+					},
+					"nodes": [
+						{
+							"raws": {
+								"semicolon": false,
+								"after": "\n    "
+							},
+							"type": "root",
+							"nodes": [
+								{
+									"raws": {
+										"before": "\n      ",
+										"between": " ",
+										"semicolon": false,
+										"after": "\n      "
+									},
+									"type": "rule",
+									"nodes": [
+										{
+											"raws": {
+												"before": "\n        ",
+												"ownSemicolon": ";"
+											},
+											"text": "${expr}",
+											"type": "literal",
+											"source": {
+												"start": {
+													"line": 8,
+													"column": 9
+												},
+												"input": {
+													"file": "styled-components-nesting-expr.js",
+													"quasis": [
+														{
+															"start": 121,
+															"end": 142
+														},
+														{
+															"start": 149,
+															"end": 163
+														}
+													]
+												}
+											}
+										}
+									],
+									"source": {
+										"start": {
+											"line": 7,
+											"column": 7
+										},
+										"input": {
+											"file": "styled-components-nesting-expr.js",
+											"quasis": [
+												{
+													"start": 121,
+													"end": 142
+												},
+												{
+													"start": 149,
+													"end": 163
+												}
+											]
+										},
+										"end": {
+											"line": 9,
+											"column": 7
+										}
+									},
+									"selector": "div"
+								}
+							],
+							"source": {
+								"input": {
+									"file": "styled-components-nesting-expr.js",
+									"quasis": [
+										{
+											"start": 121,
+											"end": 142
+										},
+										{
+											"start": 149,
+											"end": 163
+										}
+									]
+								},
+								"start": {
+									"line": 6,
+									"column": 9
+								},
+								"inline": false,
+								"lang": "template-literal",
+								"syntax": {}
+							}
+						}
+					]
+				}
+			],
+			"source": {
+				"input": {
+					"file": "styled-components-nesting-expr.js",
+					"quasis": [
+						{
+							"start": 84,
+							"end": 105
+						},
+						{
+							"start": 165,
+							"end": 166
+						}
+					]
+				},
+				"start": {
+					"line": 2,
+					"column": 36
+				},
+				"inline": false,
+				"lang": "template-literal",
+				"syntax": {}
+			}
+		}
+	],
+	"source": {
+		"input": {
+			"file": "styled-components-nesting-expr.js"
+		},
+		"start": {
+			"line": 1,
+			"column": 1
+		},
+		"lang": "jsx"
+	}
+}
