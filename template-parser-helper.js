@@ -87,11 +87,11 @@ function parseTemplateLiteralStyles(styles, input, range) {
 	const offset = input.quasis[0].start;
 	const source = input.css;
 
-	const opts = Object.assign({},input.parseOptions)
+	const opts = Object.assign({}, input.parseOptions);
 
-	delete	opts.templateLiteralStyles
-	delete	opts.expressions
-	delete	opts.quasis
+	delete opts.templateLiteralStyles;
+	delete opts.expressions;
+	delete opts.quasis;
 
 	const parseStyle = docFixer(offset, source, opts);
 
