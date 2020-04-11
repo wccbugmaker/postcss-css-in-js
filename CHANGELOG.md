@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 0.37.1
 
 - Fixed: maximum call stack size exceeded error ([#31](https://github.com/stylelint/postcss-css-in-js/pull/31)).
 
