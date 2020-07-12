@@ -1,8 +1,8 @@
 # Changelog
 
-## head
+## 0.37.2
 
-- Fixed: use HTTPS url instead of HTTP for postcss logo in README ([#39](https://github.com/stylelint/postcss-css-in-js/pull/39))
+- Fixed: use HTTPS url instead of HTTP for postcss logo in README ([#39](https://github.com/stylelint/postcss-css-in-js/pull/39)).
 
 ## 0.37.1
 
