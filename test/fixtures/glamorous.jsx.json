@@ -346,7 +346,7 @@
 								"params": {
 									"prefix": "",
 									"suffix": "`]",
-									"raw": "(minWidth: ${minWidth}px)",
+									"raw": "(min-width: ${minWidth}px)",
 									"value": "(min-width: ${minWidth}px)"
 								},
 								"between": ": ",

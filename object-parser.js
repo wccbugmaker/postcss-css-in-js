@@ -11,11 +11,6 @@ function forEach(arr, callback) {
 	arr && arr.forEach(callback);
 }
 
-const replaceProp = (fn) => (value) =>
-	value.replace(/(\(\s*)(.*?)(\s*:)/g, (s, prefix, prop, suffix) => prefix + fn(prop) + suffix);
-const camelCaseProp = replaceProp(camelCase);
-const unCamelCaseProp = replaceProp(unCamelCase);
-
 function defineRaws(node, prop, prefix, suffix, props) {
 	if (!props) {
 		props = {};
@@ -239,16 +234,8 @@ class objectParser {
 				});
 
 				if (params) {
-					atRule.params = unCamelCaseProp(params);
-					defineRaws(atRule, 'params', '', key.suffix, {
-						raw: {
-							enumerable: true,
-							get: () => camelCaseProp(atRule.params),
-							set: (value) => {
-								atRule.params = unCamelCaseProp(value);
-							},
-						},
-					});
+					atRule.params = params;
+					defineRaws(atRule, 'params', '', key.suffix);
 				}
 
 				rule = atRule;
