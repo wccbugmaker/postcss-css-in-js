@@ -67,4 +67,35 @@ describe('javascript tests', () => {
 			});
 		});
 	});
+
+	it('works with vue-emotion', () => {
+		// Related issues:
+		// - https://github.com/stylelint/stylelint/issues/4247
+		// - https://github.com/gucong3000/postcss-jsx/issues/63
+		// - https://github.com/stylelint/postcss-css-in-js/issues/22
+		const parsed = syntax.parse(`
+			import styled from 'vue-emotion';
+			
+			const Wrapper = styled('div')\`
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			\`;
+		`);
+
+		expect(parsed.nodes).toHaveLength(1);
+	});
+
+	it('works with @emotion/styled', () => {
+		const parsed = syntax.parse(`
+			import styled from '@emotion/styled';
+			
+			const Wrapper = styled.div\`
+				left: 0;
+			\`;
+		`);
+
+		expect(parsed.nodes).toHaveLength(1);
+	});
 });

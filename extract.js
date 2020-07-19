@@ -43,6 +43,13 @@ const supports = {
 	// import styled from "react-emotion";
 	'react-emotion': true,
 
+	// import styled from 'vue-emotion';
+	// Also see:
+	// - https://github.com/stylelint/stylelint/issues/4247
+	// - https://github.com/gucong3000/postcss-jsx/issues/63
+	// - https://github.com/stylelint/postcss-css-in-js/issues/22
+	'vue-emotion': true,
+
 	// import styled from 'preact-emotion'
 	'preact-emotion': true,
 
