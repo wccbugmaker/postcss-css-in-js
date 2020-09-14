@@ -1,6 +1,5 @@
 'use strict';
 
-const expect = require('chai').expect;
 const fs = require('fs');
 const syntax = require('../');
 
@@ -14,11 +13,11 @@ describe('styled-components', () => {
 		});
 
 		code = code.toString();
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
 
-		expect(document.nodes).to.have.lengthOf(1);
-		expect(document.first.nodes).to.have.lengthOf(8);
+		expect(document.nodes).toHaveLength(1);
+		expect(document.first.nodes).toHaveLength(8);
 
 		const lines = code
 			.match(/^.+$/gm)
@@ -27,12 +26,12 @@ describe('styled-components', () => {
 
 		document.first.nodes.forEach((decl, i) => {
 			if (i) {
-				expect(decl).to.have.property('type', 'decl');
+				expect(decl).toHaveProperty('type', 'decl');
 			} else {
-				expect(decl).to.have.property('type', 'comment');
+				expect(decl).toHaveProperty('type', 'comment');
 			}
 
-			expect(decl.toString()).to.equal(lines[i]);
+			expect(decl.toString()).toBe(lines[i]);
 		});
 	});
 
@@ -52,9 +51,9 @@ describe('styled-components', () => {
 			from: undefined,
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(1);
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(1);
 	});
 
 	it('interpolation with two css template literals', () => {
@@ -77,9 +76,9 @@ describe('styled-components', () => {
 			from: undefined,
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(1);
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(1);
 	});
 
 	it('empty template literal', () => {
@@ -95,9 +94,9 @@ describe('styled-components', () => {
 			from: 'empty_template_literal.js',
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(0);
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(0);
 	});
 
 	it('skip javascript syntax error', () => {
@@ -106,9 +105,9 @@ describe('styled-components', () => {
 			from: 'syntax_error.js',
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(0);
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(0);
 	});
 
 	it('skip @babel/traverse error', () => {
@@ -117,9 +116,9 @@ describe('styled-components', () => {
 			from: 'traverse_error.js',
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(0);
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(0);
 	});
 
 	it('illegal template literal', () => {
@@ -132,14 +131,14 @@ describe('styled-components', () => {
 			from: 'illegal_template_literal.js',
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(1);
-		expect(document.first.nodes).to.have.lengthOf(2);
-		expect(document.first.first).have.property('type', 'rule');
-		expect(document.first.first).have.property('selector', '$');
-		expect(document.last.last).have.property('type', 'rule');
-		expect(document.last.last).have.property('selector', '${g}');
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(1);
+		expect(document.first.nodes).toHaveLength(2);
+		expect(document.first.first).toHaveProperty('type', 'rule');
+		expect(document.first.first).toHaveProperty('selector', '$');
+		expect(document.last.last).toHaveProperty('type', 'rule');
+		expect(document.last.last).toHaveProperty('selector', '${g}');
 	});
 
 	it('styled.img', () => {
@@ -156,7 +155,7 @@ describe('styled-components', () => {
 			from: 'styled.img.js',
 		});
 
-		expect(root.toString()).to.equal(code);
+		expect(root.toString()).toBe(code);
 	});
 
 	it('throw CSS syntax error', () => {
@@ -170,7 +169,7 @@ describe('styled-components', () => {
 			syntax.parse(code, {
 				from: 'css_syntax_error.js',
 			});
-		}).to.throw('css_syntax_error.js:2:12: Unclosed block');
+		}).toThrow('css_syntax_error.js:2:12: Unclosed block');
 	});
 
 	it('not skip empty template literal', () => {
@@ -183,8 +182,8 @@ describe('styled-components', () => {
 			from: 'empty_template_literal.js',
 		});
 
-		expect(root.toString()).to.equal(code);
-		expect(root.nodes).to.have.lengthOf(1);
+		expect(root.toString()).toBe(code);
+		expect(root.nodes).toHaveLength(1);
 	});
 
 	it('fix CSS syntax error', () => {
@@ -200,15 +199,15 @@ describe('styled-components', () => {
 		});
 
 		// prettier-ignore
-		expect(document.toString()).to.equal([
+		expect(document.toString()).toBe([
 			"const styled = require(\"styled-components\");",
 			"styled.div`a{}`;",
 		].join("\n"));
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(1);
-		expect(document.first.nodes).to.have.lengthOf(1);
-		expect(document.first.first).have.property('type', 'rule');
-		expect(document.first.first).have.property('selector', 'a');
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(1);
+		expect(document.first.nodes).toHaveLength(1);
+		expect(document.first.first).toHaveProperty('type', 'rule');
+		expect(document.first.first).toHaveProperty('selector', 'a');
 	});
 
 	it('fix styled syntax error', () => {
@@ -224,15 +223,15 @@ describe('styled-components', () => {
 		});
 
 		// prettier-ignore
-		expect(document.toString()).to.equal([
+		expect(document.toString()).toBe([
 			"const styled = require(\"styled-components\");",
 			"styled.div`${ a } {}`",
 		].join("\n"));
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(1);
-		expect(document.first.nodes).to.have.lengthOf(1);
-		expect(document.first.first).have.property('type', 'rule');
-		expect(document.first.first).have.property('selector', '${ a }');
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(1);
+		expect(document.first.nodes).toHaveLength(1);
+		expect(document.first.first).toHaveProperty('type', 'rule');
+		expect(document.first.first).toHaveProperty('selector', '${ a }');
 	});
 
 	it('template literal in prop', () => {
@@ -245,10 +244,10 @@ describe('styled-components', () => {
 			from: 'template_literal_in_prop.js',
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(1);
-		expect(document.first.first).to.haveOwnProperty(
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(1);
+		expect(document.first.first).toHaveProperty(
 			'prop',
 			"margin-${/* sc-custom 'left' */ rtlSwitch}",
 		);
@@ -265,9 +264,9 @@ describe('styled-components', () => {
 			from: 'lazy_assign.js',
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(1);
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(1);
 	});
 
 	it('lazy assignment without init', () => {
@@ -280,9 +279,9 @@ describe('styled-components', () => {
 			from: 'lazy_assign_no_init.js',
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(1);
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(1);
 	});
 
 	it('array destructuring assignment', () => {
@@ -298,9 +297,9 @@ describe('styled-components', () => {
 			from: 'arr_destructuring.js',
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(1);
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(1);
 	});
 
 	it('object destructuring assignment', () => {
@@ -320,8 +319,8 @@ describe('styled-components', () => {
 			from: 'obj_destructuring.js',
 		});
 
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
-		expect(document.nodes).to.have.lengthOf(3);
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
+		expect(document.nodes).toHaveLength(3);
 	});
 });

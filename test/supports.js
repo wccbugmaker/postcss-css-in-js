@@ -1,6 +1,5 @@
 'use strict';
 
-const expect = require('chai').expect;
 const fs = require('fs');
 const path = require('path');
 const syntax = require('../');
@@ -64,13 +63,13 @@ describe('should support for each CSS in JS package', () => {
 				from: file,
 			});
 
-			expect(document.source).to.haveOwnProperty('lang', 'jsx');
-			expect(document.toString()).to.equal(code.toString());
-			expect(document.nodes.length).to.greaterThan(0);
+			expect(document.source).toHaveProperty('lang', 'jsx');
+			expect(document.toString()).toBe(code.toString());
+			expect(document.nodes.length).toBeGreaterThan(0);
 			const parsed = JSON.stringify(clean(document), 0, '\t');
 
 			// fs.writeFileSync(file + ".json", parsed + "\n");
-			expect(parsed).to.equal(fs.readFileSync(file + '.json', 'utf8').trim());
+			expect(parsed).toBe(fs.readFileSync(file + '.json', 'utf8').trim());
 		});
 	});
 });

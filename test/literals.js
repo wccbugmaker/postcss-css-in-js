@@ -1,6 +1,5 @@
 'use strict';
 
-const expect = require('chai').expect;
 const fs = require('fs');
 const syntax = require('../');
 
@@ -14,16 +13,16 @@ describe('template literals', () => {
 		});
 
 		code = code.toString();
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
 
-		expect(document.nodes).to.have.lengthOf(1);
-		expect(document.first.nodes).to.have.lengthOf(1);
+		expect(document.nodes).toHaveLength(1);
+		expect(document.first.nodes).toHaveLength(1);
 
 		document.first.nodes.forEach((decl) => {
-			expect(decl).have.property('type', 'decl');
-			expect(decl).have.property('prop', 'border-bottom');
-			expect(decl).have.property(
+			expect(decl).toHaveProperty('type', 'decl');
+			expect(decl).toHaveProperty('prop', 'border-bottom');
+			expect(decl).toHaveProperty(
 				'value',
 				'${(props) => (props.border ? `1px solid ${color}` : "0")}',
 			);
@@ -39,23 +38,18 @@ describe('template literals', () => {
 		});
 
 		code = code.toString();
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
 
-		expect(document.nodes).to.have.lengthOf(1);
-		expect(document.first.nodes).to.have.lengthOf(1);
+		expect(document.nodes).toHaveLength(1);
+		expect(document.first.nodes).toHaveLength(1);
 
 		document.first.nodes.forEach((decl) => {
-			expect(decl).have.property('type', 'decl');
-			expect(decl).have.property('prop', 'color');
-			expect(decl).have.property(
-				'value',
-				// prettier-ignore
-				[
-					"${(props) =>",
-					"(props.status === \"signed\" && \"red\") ||",
-					"\"blue\"}",
-				].join("\n\t\t"),
+			expect(decl).toHaveProperty('type', 'decl');
+			expect(decl).toHaveProperty('prop', 'color');
+			expect(decl).toHaveProperty(
+				'value', // prettier-ignore
+				['${(props) =>', '(props.status === "signed" && "red") ||', '"blue"}'].join('\n\t\t'),
 			);
 		});
 	});
@@ -69,41 +63,41 @@ describe('template literals', () => {
 		});
 
 		code = code.toString();
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
 
-		expect(document.nodes).to.have.lengthOf(9);
+		expect(document.nodes).toHaveLength(9);
 		document.nodes.forEach((root, i) => {
 			switch (i) {
 				case 0: {
-					expect(root.nodes).to.have.lengthOf(1);
+					expect(root.nodes).toHaveLength(1);
 					root.nodes.forEach((decl) => {
-						expect(decl).have.property('type', 'decl');
-						expect(decl).have.property('prop', 'display');
-						expect(decl).have.property('value', 'inline-block');
+						expect(decl).toHaveProperty('type', 'decl');
+						expect(decl).toHaveProperty('prop', 'display');
+						expect(decl).toHaveProperty('value', 'inline-block');
 					});
 
 					return;
 				}
 				case 1:
 				case 2: {
-					expect(root.nodes).to.have.lengthOf(2);
-					expect(root.first).have.property('type', 'literal');
-					expect(root.first).have.property('text', '${buttonStyles}');
-					expect(root.last).have.property('type', 'decl');
-					expect(root.last).have.property('prop', 'color');
-					expect(root.last).have.property('value', 'red');
+					expect(root.nodes).toHaveLength(2);
+					expect(root.first).toHaveProperty('type', 'literal');
+					expect(root.first).toHaveProperty('text', '${buttonStyles}');
+					expect(root.last).toHaveProperty('type', 'decl');
+					expect(root.last).toHaveProperty('prop', 'color');
+					expect(root.last).toHaveProperty('value', 'red');
 
 					return;
 				}
 				case 3:
 				case 4: {
-					expect(root.nodes).to.have.lengthOf(2);
-					expect(root.first).have.property('type', 'decl');
-					expect(root.first).have.property('prop', 'color');
-					expect(root.first).have.property('value', 'red');
-					expect(root.last).have.property('type', 'literal');
-					expect(root.last).have.property('text', '${buttonStyles}');
+					expect(root.nodes).toHaveLength(2);
+					expect(root.first).toHaveProperty('type', 'decl');
+					expect(root.first).toHaveProperty('prop', 'color');
+					expect(root.first).toHaveProperty('value', 'red');
+					expect(root.last).toHaveProperty('type', 'literal');
+					expect(root.last).toHaveProperty('text', '${buttonStyles}');
 				}
 			}
 		});
@@ -118,15 +112,15 @@ describe('template literals', () => {
 		});
 
 		code = code.toString();
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
 
-		expect(document.nodes).to.have.lengthOf(1);
-		expect(document.first.nodes).to.have.lengthOf(6);
+		expect(document.nodes).toHaveLength(1);
+		expect(document.first.nodes).toHaveLength(6);
 		document.first.nodes.forEach((rule) => {
-			expect(rule).to.have.property('type', 'rule');
-			expect(rule).to.have.property('selector');
-			expect(rule.selector).to.match(/(?:^|\s)\$\{selector\}(?=,|\s|$)/);
+			expect(rule).toHaveProperty('type', 'rule');
+			expect(rule).toHaveProperty('selector');
+			expect(rule.selector).toMatch(/(?:^|\s)\$\{selector\}(?=,|\s|$)/);
 		});
 	});
 
@@ -140,10 +134,10 @@ describe('template literals', () => {
 			})
 			.first.nodes.forEach((rule) => {
 				it(rule.selector, () => {
-					expect(rule.nodes).to.have.lengthOf(1);
+					expect(rule.nodes).toHaveLength(1);
 					const decl = rule.first;
 
-					expect(decl).to.have.property(
+					expect(decl).toHaveProperty(
 						'prop',
 						/\bprop\b/.test(rule.selector)
 							? `${/\bprefix\b/.test(rule.selector) ? 'prefix-' : ''}\${prop}${
@@ -151,7 +145,7 @@ describe('template literals', () => {
 							  }`
 							: 'prop',
 					);
-					expect(decl).to.have.property(
+					expect(decl).toHaveProperty(
 						'value',
 						/\bvalue\b/.test(rule.selector)
 							? `${/\bprefix\b/.test(rule.selector) ? 'prefix-' : ''}\${value}${
@@ -172,12 +166,12 @@ describe('template literals', () => {
 		});
 
 		code = code.toString();
-		expect(document.toString()).to.equal(code);
-		expect(document.source).to.haveOwnProperty('lang', 'jsx');
+		expect(document.toString()).toBe(code);
+		expect(document.source).toHaveProperty('lang', 'jsx');
 
 		document.walk((node) => {
-			expect(node).to.have.property('type');
-			expect(node.type).to.not.equal('literal');
+			expect(node).toHaveProperty('type');
+			expect(node.type).not.toBe('literal');
 		});
 	});
 

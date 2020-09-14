@@ -1,7 +1,6 @@
 'use strict';
 
 const camelCase = require('../camel-case');
-const expect = require('chai').expect;
 const unCamelCase = require('../un-camel-case');
 
 const data = {
@@ -42,13 +41,13 @@ const symbols = Array.from('@*:;\n,(){} ');
 describe('camelCase', () => {
 	testCases.forEach((testCase) => {
 		it(`${testCase.unCamel} => ${testCase.camel}`, () => {
-			expect(camelCase(testCase.unCamel)).to.equal(testCase.camel);
+			expect(camelCase(testCase.unCamel)).toBe(testCase.camel);
 		});
 	});
 	describe('symbols', () => {
 		symbols.forEach((symbol) => {
 			it(JSON.stringify(symbol), () => {
-				expect(camelCase(testCases.map((testCase) => testCase.unCamel).join(symbol))).to.equal(
+				expect(camelCase(testCases.map((testCase) => testCase.unCamel).join(symbol))).toBe(
 					testCases.map((testCase) => testCase.camel).join(symbol),
 				);
 			});
@@ -59,13 +58,13 @@ describe('camelCase', () => {
 describe('unCamelCase', () => {
 	testCases.forEach((testCase) => {
 		it(`${testCase.camel} => ${testCase.unCamel}`, () => {
-			expect(unCamelCase(testCase.camel)).to.equal(testCase.unCamel);
+			expect(unCamelCase(testCase.camel)).toBe(testCase.unCamel);
 		});
 	});
 	describe('symbols', () => {
 		symbols.forEach((symbol) => {
 			it(JSON.stringify(symbol), () => {
-				expect(unCamelCase(testCases.map((testCase) => testCase.camel).join(symbol))).to.equal(
+				expect(unCamelCase(testCases.map((testCase) => testCase.camel).join(symbol))).toBe(
 					testCases.map((testCase) => testCase.unCamel).join(symbol),
 				);
 			});

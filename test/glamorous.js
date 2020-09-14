@@ -1,6 +1,5 @@
 'use strict';
 
-const expect = require('chai').expect;
 const fs = require('fs');
 const syntax = require('../');
 
@@ -15,26 +14,23 @@ describe('javascript tests', () => {
 
 		code = code.toString();
 
-		expect(document.toString(syntax)).to.equal(code);
-		expect(document.nodes).to.lengthOf(5);
+		expect(document.toString(syntax)).toBe(code);
+		expect(document.nodes).toHaveLength(5);
 
 		document.nodes.forEach((root) => {
-			expect(root.source).to.haveOwnProperty('input');
+			expect(root.source).toHaveProperty('input');
 
-			expect(code).to.includes(root.source.input.css);
-			expect(root.source.input.css.length).lessThan(code.length);
-			expect(root.source).to.haveOwnProperty('start').to.haveOwnProperty('line').to.greaterThan(1);
+			expect(code).toEqual(expect.stringContaining(root.source.input.css));
+			expect(root.source.input.css.length).toBeLessThan(code.length);
+			expect(root.source.start.line).toBeGreaterThan(1);
 
 			root.walk((node) => {
-				expect(node).to.haveOwnProperty('source');
+				expect(node).toHaveProperty('source');
 
-				expect(node.source)
-					.to.haveOwnProperty('input')
-					.to.haveOwnProperty('css')
-					.equal(root.source.input.css);
+				expect(node.source.input.css).toBe(root.source.input.css);
 
-				expect(node.source).to.haveOwnProperty('start').to.haveOwnProperty('line');
-				expect(node.source).to.haveOwnProperty('end').to.haveOwnProperty('line');
+				expect(node.source).toHaveProperty('start.line');
+				expect(node.source).toHaveProperty('end.line');
 			});
 		});
 	});

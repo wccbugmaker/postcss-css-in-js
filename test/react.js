@@ -1,6 +1,5 @@
 'use strict';
 
-const expect = require('chai').expect;
 const syntax = require('../');
 
 describe('react', () => {
@@ -19,12 +18,12 @@ export default <img style=
 			from: 'before.js',
 		});
 
-		expect(document.toString(syntax)).to.equal(code);
-		expect(document.nodes).to.lengthOf(1);
-		expect(document.first.source.input.css).to.match(/^\s+\{/);
-		expect(document.first.source.start.column).to.equal(1);
-		expect(document.first.raws.beforeStart).to.match(/\n$/);
-		expect(document.first.first.raws.before).to.match(/^\s+$/);
-		expect(document.first.first.source.start.column).to.greaterThan(1);
+		expect(document.toString(syntax)).toBe(code);
+		expect(document.nodes).toHaveLength(1);
+		expect(document.first.source.input.css).toMatch(/^\s+\{/);
+		expect(document.first.source.start.column).toBe(1);
+		expect(document.first.raws.beforeStart).toMatch(/\n$/);
+		expect(document.first.first.raws.before).toMatch(/^\s+$/);
+		expect(document.first.first.source.start.column).toBeGreaterThan(1);
 	});
 });

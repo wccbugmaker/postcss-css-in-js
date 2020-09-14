@@ -2,7 +2,6 @@
 
 const autoprefixer = require('autoprefixer');
 const cases = require('postcss-parser-tests');
-const expect = require('chai').expect;
 const JSON5 = require('json5');
 const objectStringify = require('../object-stringify');
 const postcss = require('postcss');
@@ -14,7 +13,7 @@ describe('CSS in JS', () => {
 			from: '/fixtures/basic.js',
 		});
 
-		expect(document.nodes).to.lengthOf(0);
+		expect(document.nodes).toHaveLength(0);
 	});
 	it('glamorous', () => {
 		const code = `
@@ -47,7 +46,7 @@ describe('CSS in JS', () => {
 				from: '/fixtures/glamorous-prefix.jsx',
 			})
 			.then((result) => {
-				expect(result.content).equal(out);
+				expect(result.content).toBe(out);
 			});
 	});
 
@@ -66,9 +65,9 @@ describe('CSS in JS', () => {
 			).first.first.first;
 
 			decl.raws.prop.raw = 'WebkitBorderRadius';
-			expect(decl.prop).to.equal('-webkit-border-radius');
+			expect(decl.prop).toBe('-webkit-border-radius');
 			decl.raws.value.raw = '15px';
-			expect(decl.value).to.equal('15px');
+			expect(decl.value).toBe('15px');
 		});
 		it('atRule.raws.params.raw', () => {
 			const atRule = syntax.parse(
@@ -86,7 +85,7 @@ describe('CSS in JS', () => {
 			).first.first.first;
 
 			atRule.raws.params.raw = "(minWidth: ' + minWidth + ')";
-			expect(atRule.params).to.equal("(min-width: ' + minWidth + ')");
+			expect(atRule.params).toBe("(min-width: ' + minWidth + ')");
 		});
 	});
 
@@ -100,10 +99,10 @@ describe('CSS in JS', () => {
 			from: '/fixtures/glamorous-empty-object-literals.jsx',
 		});
 
-		expect(root.toString()).to.equal(code);
+		expect(root.toString()).toBe(code);
 
 		root.first.first.raws.after = '';
-		expect(root.toString()).to.equal(`
+		expect(root.toString()).toBe(`
 			import glm from 'glamorous';
 			const Component1 = glm.a({});
 		`);
@@ -121,9 +120,9 @@ describe('CSS in JS', () => {
 			from: '/fixtures/glamorous-float.jsx',
 		});
 
-		expect(root.first.first.first).to.haveOwnProperty('prop', 'float');
+		expect(root.first.first.first).toHaveProperty('prop', 'float');
 
-		expect(root.toString()).to.equal(`
+		expect(root.toString()).toBe(`
 			import glm from 'glamorous';
 			const Component1 = glm.a({
 				cssFloat: "left",
@@ -140,7 +139,7 @@ describe('CSS in JS', () => {
 			}),
 		];
 
-		expect(root.toString()).to.equal(`
+		expect(root.toString()).toBe(`
 			import glm from 'glamorous';
 			const Component1 = glm.a({
 				cssFloat: "right",
@@ -159,7 +158,7 @@ describe('CSS in JS', () => {
 				const jsSource = root.toString(objectStringify).trim();
 				const jsonSource = '{\n' + jsSource.replace(/,$/, '').replace(/[\s;]+$/gm, '') + '\n}';
 
-				expect(JSON5.parse(jsonSource)).be.ok;
+				expect(JSON5.parse(jsonSource)).toBeTruthy();
 			});
 		});
 	});
@@ -178,6 +177,6 @@ describe('CSS in JS', () => {
 			from: filename,
 		});
 
-		expect(document.nodes).to.have.lengthOf(2);
+		expect(document.nodes).toHaveLength(2);
 	});
 });
