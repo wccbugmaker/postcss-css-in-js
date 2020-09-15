@@ -50,6 +50,26 @@ describe('CSS in JS', () => {
 			});
 	});
 
+	it('leaves kebab-case and camelCase in media query params untouched', () => {
+		// In previous versions, at-rule properties were converted from camelCase to kebab-case
+		// during parsing, and back to camelCase during stringifying. This is however not correct,
+		// params should not be changed. Also see:
+		// https://github.com/stylelint/postcss-css-in-js/issues/38
+		const code = `
+		import glm from 'glamorous';
+		const Component1 = glm.a({
+			"@media (max-width: 1000px)": {
+				color: "red",
+			},
+			"@media (maxWidth: 1000px)": {
+				color: "red",
+			},
+		});
+		`;
+
+		expect(syntax.parse(code).toString()).toBe(code);
+	});
+
 	describe('setter for object literals', () => {
 		it('decl.raws.prop.raw & decl.raws.value.raw', () => {
 			const decl = syntax.parse(
@@ -74,7 +94,7 @@ describe('CSS in JS', () => {
 				`
 				import glm from 'glamorous';
 				const Component1 = glm.a({
-					'@media (maxWidth: 500px)': {
+					'@media (max-width: 500px)': {
 						borderRadius: '5px'
 					}
 				});
@@ -84,7 +104,7 @@ describe('CSS in JS', () => {
 				},
 			).first.first.first;
 
-			atRule.raws.params.raw = "(minWidth: ' + minWidth + ')";
+			atRule.raws.params.raw = "(min-width: ' + minWidth + ')";
 			expect(atRule.params).toBe("(min-width: ' + minWidth + ')");
 		});
 	});

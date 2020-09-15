@@ -11,7 +11,7 @@ const Component1 = glm.a(
 		[`unknownPropertyaa${a}`]: "1.8em", // must not trigger any warnings
 		["unknownProperty" + 1 + "a"]: "1.8em", // must not trigger any warnings
 		display: "inline-block",
-		[`@media (minWidth: ${minWidth}px)`]: {
+		[`@media (min-width: ${minWidth}px)`]: {
 			color: "red",
 		},
 		// unkown pseudo class selector
