@@ -67,4 +67,103 @@ describe('javascript tests', () => {
 			});
 		});
 	});
+
+	it('works with vue-emotion', () => {
+		// Related issues:
+		// - https://github.com/stylelint/stylelint/issues/4247
+		// - https://github.com/gucong3000/postcss-jsx/issues/63
+		// - https://github.com/stylelint/postcss-css-in-js/issues/22
+		const parsed = syntax.parse(`
+			import styled from 'vue-emotion';
+			
+			const Wrapper = styled('div')\`
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			\`;
+		`);
+
+		expect(parsed.nodes).toHaveLength(1);
+	});
+
+	it('works with @emotion/styled', () => {
+		const parsed = syntax.parse(`
+			import styled from '@emotion/styled';
+			
+			const Wrapper = styled.div\`
+				left: 0;
+			\`;
+		`);
+
+		expect(parsed.nodes).toHaveLength(1);
+	});
+
+	it('works with css objects', () => {
+		// It should parse:
+		// - Inline objects (inside of the JSX)
+		// - Variables that are referenced inside of the JSX
+		// - Variables that are referenced as spread
+		const parsed = syntax.parse(`
+			import React from 'react';
+
+			const spreaded = {
+				width: 100,
+				padding: 40,
+			};
+			
+			const notInline = {
+				...spreaded,
+				margin: 60,
+			};
+			
+			const Component = () => (
+				<div css={{
+					...spreaded,
+					margin: 60,
+				}}>
+					some other text
+					<span css={notInline}>Hello</span>
+				</div>
+			);
+		`);
+
+		expect(parsed.nodes).toHaveLength(3);
+	});
+
+	it('works with css object functions', () => {
+		// Just like the previous test, both inline and variable styles should be parsed. It should
+		// also parse objects if they are defined in a arrow function, which is for example what is
+		// used by emotion-theming.
+		// See also:
+		// - https://github.com/gucong3000/postcss-jsx/issues/69
+		// - https://github.com/stylelint/postcss-css-in-js/issues/22
+		const parsed = syntax.parse(`
+			import React from 'react';
+
+			const spreaded = {
+				width: 100,
+				padding: 40,
+			}
+			
+			const notInline = theme => ({
+				...spreaded,
+				margin: 60,
+				color: theme.color.primary,
+			});
+			
+			const Component = () => (
+				<div css={theme => ({
+					...spreaded,
+					margin: 60,
+					color: theme.color.primary,
+				})}>
+					some other text
+					<span css={notInline}>Hello</span>
+				</div>
+			);
+		`);
+
+		expect(parsed.nodes).toHaveLength(3);
+	});
 });

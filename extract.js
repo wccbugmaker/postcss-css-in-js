@@ -43,6 +43,13 @@ const supports = {
 	// import styled from "react-emotion";
 	'react-emotion': true,
 
+	// import styled from 'vue-emotion';
+	// Also see:
+	// - https://github.com/stylelint/stylelint/issues/4247
+	// - https://github.com/gucong3000/postcss-jsx/issues/63
+	// - https://github.com/stylelint/postcss-css-in-js/issues/22
+	'vue-emotion': true,
+
 	// import styled from 'preact-emotion'
 	'preact-emotion': true,
 
@@ -197,6 +204,16 @@ function literalParser(source, opts, styles) {
 			objLiteral.add(path.node);
 
 			return path;
+		}
+		// If this is not an object but a function returning an object, we want to parse the
+		// object that is in the body of the function. We will only parse it if the body only
+		// consist of an object and nothing else.
+		else if (path.isArrowFunctionExpression()) {
+			const body = path.get('body');
+
+			if (body) {
+				addObjectExpression(body);
+			}
 		}
 	}
 
