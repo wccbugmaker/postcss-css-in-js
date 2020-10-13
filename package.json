@@ -87,7 +87,7 @@
     "@stylelint/remark-preset": "^1.0.0",
     "autoprefixer": "^9.8.6",
     "codecov": "^3.8.0",
-    "eslint": "^7.10.0",
+    "eslint": "^7.11.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-config-stylelint": "^12.0.0",
     "husky": "^4.3.0",
