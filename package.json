@@ -80,7 +80,7 @@
     ]
   },
   "dependencies": {
-    "@babel/core": ">=7.12.13"
+    "@babel/core": ">=7.12.16"
   },
   "devDependencies": {
     "@stylelint/prettier-config": "^2.0.0",
