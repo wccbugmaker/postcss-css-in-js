@@ -47,7 +47,7 @@ function templateTokenize(input) {
 		if (returned.length) {
 			token = [
 				returned[0][0],
-				returned.map((token) => token[1]).join(''),
+				returned.map((parentToken) => parentToken[1]).join(''),
 				returned[0][2],
 				returned[0][3],
 				line,

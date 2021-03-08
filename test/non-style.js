@@ -7,7 +7,7 @@ const syntax = require('../');
 
 describe('not throw error for non-style js file', () => {
 	files.forEach((file) => {
-		it(file, () => {
+		it(`${file}`, () => {
 			const code = fs.readFileSync(file);
 			const document = syntax.parse(code, {
 				from: file,

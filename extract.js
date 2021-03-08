@@ -417,9 +417,9 @@ function literalParser(source, opts, styles) {
 			return;
 		}
 
-		const quasis = node.quasis.map((node) => ({
-			start: node.start,
-			end: node.end,
+		const quasis = node.quasis.map((quasiNode) => ({
+			start: quasiNode.start,
+			end: quasiNode.end,
 		}));
 		const style = {
 			startIndex: quasis[0].start,
@@ -428,9 +428,9 @@ function literalParser(source, opts, styles) {
 		};
 
 		if (node.expressions.length) {
-			const expressions = node.expressions.map((node) => ({
-				start: node.start,
-				end: node.end,
+			const expressions = node.expressions.map((expressionNode) => ({
+				start: expressionNode.start,
+				end: expressionNode.end,
 			}));
 
 			style.syntax = loadSyntax(opts, __dirname);

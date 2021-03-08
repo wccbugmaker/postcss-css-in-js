@@ -56,7 +56,7 @@ describe('should support for each CSS in JS package', () => {
 		'tpl-special.mjs',
 		'material-ui.jsx',
 	].forEach((file) => {
-		it(file, () => {
+		it(`${file}`, () => {
 			file = require.resolve('./fixtures/' + file);
 			const code = fs.readFileSync(file);
 			const document = syntax.parse(code, {

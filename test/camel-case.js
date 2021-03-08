@@ -46,7 +46,7 @@ describe('camelCase', () => {
 	});
 	describe('symbols', () => {
 		symbols.forEach((symbol) => {
-			it(JSON.stringify(symbol), () => {
+			it(`"${symbol}"`, () => {
 				expect(camelCase(testCases.map((testCase) => testCase.unCamel).join(symbol))).toBe(
 					testCases.map((testCase) => testCase.camel).join(symbol),
 				);
@@ -63,7 +63,7 @@ describe('unCamelCase', () => {
 	});
 	describe('symbols', () => {
 		symbols.forEach((symbol) => {
-			it(JSON.stringify(symbol), () => {
+			it(`"${symbol}"`, () => {
 				expect(unCamelCase(testCases.map((testCase) => testCase.camel).join(symbol))).toBe(
 					testCases.map((testCase) => testCase.unCamel).join(symbol),
 				);

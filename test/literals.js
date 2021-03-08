@@ -67,6 +67,10 @@ describe('template literals', () => {
 		expect(document.source).toHaveProperty('lang', 'jsx');
 
 		expect(document.nodes).toHaveLength(9);
+		/* eslint-disable jest/no-conditional-expect -- in the current state, the related test fixture
+		 * is likely too complicated to resolve (up to 45 checks). we should consider different approaches
+		 * in the future. for more info, see https://github.com/stylelint/postcss-css-in-js/pull/80
+		 */
 		document.nodes.forEach((root, i) => {
 			switch (i) {
 				case 0: {
@@ -101,6 +105,7 @@ describe('template literals', () => {
 				}
 			}
 		});
+		/* eslint-enable jest/no-conditional-expect */
 	});
 
 	it('selector', () => {
@@ -133,7 +138,7 @@ describe('template literals', () => {
 				from: file,
 			})
 			.first.nodes.forEach((rule) => {
-				it(rule.selector, () => {
+				it(`${rule.selector}`, () => {
 					expect(rule.nodes).toHaveLength(1);
 					const decl = rule.first;
 
@@ -184,7 +189,7 @@ describe('template literals', () => {
 			'./fixtures/tpl-decl.mjs',
 			'./fixtures/tpl-special.mjs',
 		].map((file) => {
-			it(file, () => {
+			it(`${file}`, () => {
 				file = require.resolve(file);
 				const code = fs.readFileSync(file);
 

@@ -5,7 +5,7 @@ function camelCase(str) {
 		/^-?[a-z]+(?:-[a-z]+)+$/.test(s)
 			? s
 					.replace(/^-(ms|moz|khtml|epub|(\w+-?)*webkit)(?=-)/i, '$1')
-					.replace(/-\w/g, (s) => s[1].toUpperCase())
+					.replace(/-\w/g, (uncasedStr) => uncasedStr[1].toUpperCase())
 			: s,
 	);
 }

@@ -45,10 +45,10 @@ function literal(start) {
 	if (input.templateLiteralStyles) {
 		const offset = input.quasis[0].start;
 		const nodeIndex = getNodeIndex(node, input);
-		const start = offset + nodeIndex;
-		const end = start + node.text.length;
+		const startIndex = offset + nodeIndex;
+		const endIndex = startIndex + node.text.length;
 		const templateLiteralStyles = input.templateLiteralStyles.filter(
-			(style) => style.startIndex <= end && start < style.endIndex,
+			(style) => style.startIndex <= endIndex && startIndex < style.endIndex,
 		);
 
 		if (templateLiteralStyles.length) {

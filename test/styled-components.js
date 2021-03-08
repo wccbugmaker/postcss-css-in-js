@@ -19,20 +19,18 @@ describe('styled-components', () => {
 		expect(document.nodes).toHaveLength(1);
 		expect(document.first.nodes).toHaveLength(8);
 
-		const lines = code
-			.match(/^.+$/gm)
-			.slice(3)
-			.map((line) => line.replace(/^\s*(.+?);?\s*$/, '$1'));
-
-		document.first.nodes.forEach((decl, i) => {
-			if (i) {
-				expect(decl).toHaveProperty('type', 'decl');
-			} else {
-				expect(decl).toHaveProperty('type', 'comment');
-			}
-
-			expect(decl.toString()).toBe(lines[i]);
-		});
+		// this was previously a .forEach over every line within styled.button
+		// instead, we unwound the loop to satisfy jest/no-conditional-expect
+		// we expect the first line to be a comment, and the next 7 to be decls
+		// see https://github.com/stylelint/postcss-css-in-js/pull/80 for more details
+		expect(document.first.nodes[0]).toHaveProperty('type', 'comment');
+		expect(document.first.nodes[1]).toHaveProperty('type', 'decl');
+		expect(document.first.nodes[2]).toHaveProperty('type', 'decl');
+		expect(document.first.nodes[3]).toHaveProperty('type', 'decl');
+		expect(document.first.nodes[4]).toHaveProperty('type', 'decl');
+		expect(document.first.nodes[5]).toHaveProperty('type', 'decl');
+		expect(document.first.nodes[6]).toHaveProperty('type', 'decl');
+		expect(document.first.nodes[7]).toHaveProperty('type', 'decl');
 	});
 
 	it('interpolation with css template literal', () => {
