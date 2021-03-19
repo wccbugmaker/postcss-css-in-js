@@ -60,10 +60,7 @@ function templateTokenize(input) {
 		return token;
 	}
 
-	return Object.assign({}, tokenizer, {
-		back,
-		nextToken,
-	});
+	return { ...tokenizer, back, nextToken };
 }
 
 module.exports = templateTokenize;

@@ -87,7 +87,7 @@ function parseTemplateLiteralStyles(styles, input, range) {
 	const offset = input.quasis[0].start;
 	const source = input.css;
 
-	const opts = Object.assign({}, input.parseOptions);
+	const opts = { ...input.parseOptions };
 
 	delete opts.templateLiteralStyles;
 	delete opts.expressions;
@@ -185,17 +185,11 @@ class LocalFixer {
 		let root = style.root;
 
 		try {
-			root = this.templateParse(
-				style.content,
-				Object.assign(
-					{},
-					opts,
-					{
-						map: false,
-					},
-					style.opts,
-				),
-			);
+			root = this.templateParse(style.content, {
+				...opts,
+				map: false,
+				...style.opts,
+			});
 		} catch (error) {
 			if (style.ignoreErrors) {
 				return;
