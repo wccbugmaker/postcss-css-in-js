@@ -55,7 +55,6 @@
     "rules": {
       "array-callback-return": "off",
       "no-confusing-arrow": "off",
-      "no-else-return": "off",
       "prefer--template": "off",
       "prefer-object-spread": "off",
       "prefer-rest-params": "off",

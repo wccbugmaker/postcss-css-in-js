@@ -269,33 +269,33 @@ class objectParser {
 			raw(atRule);
 
 			return atRule;
-		} else {
-			let decl;
-
-			if (key.raw) {
-				decl = postcss.decl({
-					prop: key.value,
-					value: value.value,
-					raws: {
-						prop: key,
-					},
-				});
-			} else {
-				decl = postcss.decl({
-					prop: unCamelCase(key.value),
-					value: value.value,
-				});
-
-				defineRaws(decl, 'prop', key.prefix, key.suffix, {
-					raw: 'camel',
-				});
-			}
-
-			defineRaws(decl, 'value', value.prefix, value.suffix);
-			raw(decl);
-
-			return decl;
 		}
+
+		let decl;
+
+		if (key.raw) {
+			decl = postcss.decl({
+				prop: key.value,
+				value: value.value,
+				raws: {
+					prop: key,
+				},
+			});
+		} else {
+			decl = postcss.decl({
+				prop: unCamelCase(key.value),
+				value: value.value,
+			});
+
+			defineRaws(decl, 'prop', key.prefix, key.suffix, {
+				raw: 'camel',
+			});
+		}
+
+		defineRaws(decl, 'value', value.prefix, value.suffix);
+		raw(decl);
+
+		return decl;
 
 		function raw(postcssNode) {
 			postcssNode.raws.between = between;

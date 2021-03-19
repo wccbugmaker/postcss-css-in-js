@@ -17,7 +17,9 @@ function templateTokenize(input) {
 			(returned.length && token[0] === returned[0][0])
 		) {
 			return true;
-		} else if (returned.length) {
+		}
+
+		if (returned.length) {
 			back(token);
 		}
 	}

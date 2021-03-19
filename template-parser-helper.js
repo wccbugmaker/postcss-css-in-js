@@ -200,7 +200,9 @@ class LocalFixer {
 		} catch (error) {
 			if (style.ignoreErrors) {
 				return;
-			} else if (!style.skipConvert) {
+			}
+
+			if (!style.skipConvert) {
 				this.error(error);
 			}
 
