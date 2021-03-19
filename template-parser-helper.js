@@ -142,6 +142,8 @@ class LocalFixer {
 
 				return true;
 			}
+
+			return false;
 		});
 
 		this.line = line;

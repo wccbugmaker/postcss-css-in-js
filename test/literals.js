@@ -188,7 +188,7 @@ describe('template literals', () => {
 			'./fixtures/tpl-selector.mjs',
 			'./fixtures/tpl-decl.mjs',
 			'./fixtures/tpl-special.mjs',
-		].map((file) => {
+		].forEach((file) => {
 			it(`${file}`, () => {
 				file = require.resolve(file);
 				const code = fs.readFileSync(file);
