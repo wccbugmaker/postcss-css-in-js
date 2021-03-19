@@ -229,7 +229,7 @@ class objectParser {
 					nodes: [],
 				});
 
-				defineRaws(atRule, 'name', key.prefix + '@', params ? '' : key.suffix, {
+				defineRaws(atRule, 'name', `${key.prefix}@`, params ? '' : key.suffix, {
 					raw: 'camel',
 				});
 

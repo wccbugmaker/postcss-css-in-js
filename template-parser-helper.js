@@ -172,10 +172,7 @@ class LocalFixer {
 		if (error && error.name === 'CssSyntaxError') {
 			this.object(error);
 			this.object(error.input);
-			error.message = error.message.replace(
-				/:\d+:\d+:/,
-				':' + error.line + ':' + error.column + ':',
-			);
+			error.message = error.message.replace(/:\d+:\d+:/, `:${error.line}:${error.column}:`);
 		}
 
 		return error;
