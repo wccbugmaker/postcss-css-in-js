@@ -193,11 +193,13 @@ describe('template literals', () => {
 				file = require.resolve(file);
 				const code = fs.readFileSync(file);
 
-				syntax({
-					css: 'safe-parser',
-				}).parse(code, {
-					from: 'styled-safe-parse.js',
-				});
+				expect(() =>
+					syntax({
+						css: 'safe-parser',
+					}).parse(code, {
+						from: 'styled-safe-parse.js',
+					}),
+				).not.toThrow();
 			});
 		});
 	});

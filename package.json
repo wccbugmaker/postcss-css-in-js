@@ -54,9 +54,7 @@
     ],
     "rules": {
       "prefer-rest-params": "off",
-      "prefer-spread": "off",
-      "jest/expect-expect": "off",
-      "jest/valid-expect": "off"
+      "prefer-spread": "off"
     }
   },
   "remarkConfig": {
