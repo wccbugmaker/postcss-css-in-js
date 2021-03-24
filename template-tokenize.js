@@ -2,10 +2,10 @@
 
 const tokenize = require('postcss/lib/tokenize');
 
-function templateTokenize(input) {
+function templateTokenize(input, options = {}) {
 	let pos = input.quasis[0].start;
 	const quasis = input.quasis.filter((quasi) => quasi.start !== quasi.end);
-	const tokenizer = tokenize.apply(this, arguments);
+	const tokenizer = tokenize(input, options);
 
 	function tokenInExpressions(token, returned) {
 		const start = pos;
@@ -27,20 +27,16 @@ function templateTokenize(input) {
 	function back(token) {
 		pos -= token[1].length;
 
-		return tokenizer.back.apply(tokenizer, arguments);
+		return tokenizer.back(token);
 	}
 
-	function nextToken() {
-		const args = arguments;
+	function nextToken(opts) {
 		const returned = [];
 		let token;
 		let line;
 		let column;
 
-		while (
-			(token = tokenizer.nextToken.apply(tokenizer, args)) &&
-			tokenInExpressions(token, returned)
-		) {
+		while ((token = tokenizer.nextToken(opts)) && tokenInExpressions(token, returned)) {
 			line = token[4] || token[2] || line;
 			column = token[5] || token[3] || column;
 			returned.push(token);

@@ -51,11 +51,7 @@
   "eslintConfig": {
     "extends": [
       "stylelint"
-    ],
-    "rules": {
-      "prefer-rest-params": "off",
-      "prefer-spread": "off"
-    }
+    ]
   },
   "remarkConfig": {
     "plugins": [
