@@ -173,10 +173,10 @@ describe('CSS in JS', () => {
 
 			if (name === 'custom-properties.css') return;
 
-			it('objectStringifier ' + name, () => {
+			it(`objectStringifier ${name}`, () => {
 				const root = postcss.parse(css);
 				const jsSource = root.toString(objectStringify).trim();
-				const jsonSource = '{\n' + jsSource.replace(/,$/, '').replace(/[\s;]+$/gm, '') + '\n}';
+				const jsonSource = `{\n${jsSource.replace(/,$/, '').replace(/[\s;]+$/gm, '')}\n}`;
 
 				expect(JSON5.parse(jsonSource)).toBeTruthy();
 			});

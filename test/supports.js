@@ -57,7 +57,7 @@ describe('should support for each CSS in JS package', () => {
 		'material-ui.jsx',
 	].forEach((file) => {
 		it(`${file}`, () => {
-			file = require.resolve('./fixtures/' + file);
+			file = require.resolve(`./fixtures/${file}`);
 			const code = fs.readFileSync(file);
 			const document = syntax.parse(code, {
 				from: file,
@@ -69,7 +69,7 @@ describe('should support for each CSS in JS package', () => {
 			const parsed = JSON.stringify(clean(document), 0, '\t');
 
 			// fs.writeFileSync(file + ".json", parsed + "\n");
-			expect(parsed).toBe(fs.readFileSync(file + '.json', 'utf8').trim());
+			expect(parsed).toBe(fs.readFileSync(`${file}.json`, 'utf8').trim());
 		});
 	});
 });

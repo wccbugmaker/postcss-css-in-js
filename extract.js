@@ -205,10 +205,11 @@ function literalParser(source, opts, styles) {
 
 			return path;
 		}
+
 		// If this is not an object but a function returning an object, we want to parse the
 		// object that is in the body of the function. We will only parse it if the body only
 		// consist of an object and nothing else.
-		else if (path.isArrowFunctionExpression()) {
+		if (path.isArrowFunctionExpression()) {
 			const body = path.get('body');
 
 			if (body) {

@@ -51,19 +51,7 @@
   "eslintConfig": {
     "extends": [
       "stylelint"
-    ],
-    "rules": {
-      "array-callback-return": "off",
-      "no-confusing-arrow": "off",
-      "no-else-return": "off",
-      "prefer--template": "off",
-      "prefer-object-spread": "off",
-      "prefer-rest-params": "off",
-      "prefer-spread": "off",
-      "prefer-template": "off",
-      "jest/expect-expect": "off",
-      "jest/valid-expect": "off"
-    }
+    ]
   },
   "remarkConfig": {
     "plugins": [

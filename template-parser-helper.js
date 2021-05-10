@@ -87,7 +87,7 @@ function parseTemplateLiteralStyles(styles, input, range) {
 	const offset = input.quasis[0].start;
 	const source = input.css;
 
-	const opts = Object.assign({}, input.parseOptions);
+	const opts = { ...input.parseOptions };
 
 	delete opts.templateLiteralStyles;
 	delete opts.expressions;
@@ -142,6 +142,8 @@ class LocalFixer {
 
 				return true;
 			}
+
+			return false;
 		});
 
 		this.line = line;
@@ -172,10 +174,7 @@ class LocalFixer {
 		if (error && error.name === 'CssSyntaxError') {
 			this.object(error);
 			this.object(error.input);
-			error.message = error.message.replace(
-				/:\d+:\d+:/,
-				':' + error.line + ':' + error.column + ':',
-			);
+			error.message = error.message.replace(/:\d+:\d+:/, `:${error.line}:${error.column}:`);
 		}
 
 		return error;
@@ -186,21 +185,17 @@ class LocalFixer {
 		let root = style.root;
 
 		try {
-			root = this.templateParse(
-				style.content,
-				Object.assign(
-					{},
-					opts,
-					{
-						map: false,
-					},
-					style.opts,
-				),
-			);
+			root = this.templateParse(style.content, {
+				...opts,
+				map: false,
+				...style.opts,
+			});
 		} catch (error) {
 			if (style.ignoreErrors) {
 				return;
-			} else if (!style.skipConvert) {
+			}
+
+			if (!style.skipConvert) {
 				this.error(error);
 			}
 
