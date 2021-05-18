@@ -71,7 +71,7 @@
     ]
   },
   "dependencies": {
-    "@babel/core": ">=7.14.2"
+    "@babel/core": ">=7.14.3"
   },
   "devDependencies": {
     "@stylelint/prettier-config": "^2.0.0",
