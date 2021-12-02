@@ -11,14 +11,9 @@ on:
 
 jobs:
   lint:
-    name: Lint on Node.js ${{ matrix.node }} and ${{ matrix.os }}
+    name: Lint on Node.js LTS
 
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        node: [12]
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
