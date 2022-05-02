@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.37.3
+
+- Fixed: silent fail if Babel config is present ([#258](https://github.com/stylelint/postcss-css-in-js/pull/258)).
+
 ## 0.37.2
 
 - Fixed: use HTTPS url instead of HTTP for postcss logo in README ([#39](https://github.com/stylelint/postcss-css-in-js/pull/39)).
