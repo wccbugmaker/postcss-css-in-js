@@ -67,11 +67,12 @@
       "!**/.{prettier,eslint,mocha}rc.{js,cjs}"
     ],
     "testMatch": [
-      "**/test/*.js"
+      "**/test/*.js",
+      "**/test/**/*.test.js"
     ]
   },
   "dependencies": {
-    "@babel/core": ">=7.15.5"
+    "@babel/core": "^7.17.9"
   },
   "devDependencies": {
     "@stylelint/prettier-config": "^2.0.0",

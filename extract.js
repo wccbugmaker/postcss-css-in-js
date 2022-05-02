@@ -144,7 +144,15 @@ function loadBabelOpts(opts) {
 
 		if (Array.isArray(fileOpts[key]) && Array.isArray(opts.parserOpts[key])) {
 			// combine arrays for plugins
-			opts.parserOpts[key] = opts.parserOpts[key].concat(fileOpts[key]);
+			// plugins in fileOpts could be string, array or object
+			for (const plugin of fileOpts[key]) {
+				const option =
+					Array.isArray(plugin) || typeof plugin === 'string'
+						? plugin
+						: [plugin.key, plugin.options];
+
+				opts.parserOpts[key] = [...opts.parserOpts[key], option];
+			}
 		} else {
 			// because some options need to be passed to parser also
 			opts.parserOpts[key] = fileOpts[key];
