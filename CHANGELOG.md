@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.38.0
+
+- Removed: hardcoded transform from float to cssFloat in objects ([#172](https://github.com/stylelint/postcss-css-in-js/pull/172))
+- Fixed: silent fail if @babel/plugin-proposal-decorators is in user's Babel configuration ([#237](https://github.com/stylelint/postcss-css-in-js/pull/237))
+
 ## 0.37.3
 
 - Fixed: silent fail if Babel config is present ([#258](https://github.com/stylelint/postcss-css-in-js/pull/258)).
