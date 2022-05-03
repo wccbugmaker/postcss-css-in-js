@@ -1,6 +1,6 @@
 {
   "name": "@stylelint/postcss-css-in-js",
-  "version": "0.37.3",
+  "version": "0.38.0",
   "description": "PostCSS syntax for parsing CSS in JS literals",
   "keywords": [
     "postcss",
