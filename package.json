@@ -75,6 +75,7 @@
     "@babel/core": "^7.17.9"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.17.9",
     "@stylelint/prettier-config": "^2.0.0",
     "@stylelint/remark-preset": "^2.0.0",
     "autoprefixer": "^9.8.6",

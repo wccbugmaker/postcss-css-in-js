@@ -159,6 +159,17 @@ function loadBabelOpts(opts) {
 		}
 	}
 
+	// avoid conflicting with the legacy decorators plugin
+	if (opts.plugins && opts.plugins.some((p) => p.key === 'proposal-decorators')) {
+		const index = opts.parserOpts.plugins.findIndex(
+			(p) => Array.isArray(p) && p[0] === 'decorators',
+		);
+
+		if (index > -1) {
+			opts.parserOpts.plugins.splice(index, 1);
+		}
+	}
+
 	return opts;
 }
 

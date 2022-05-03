@@ -73,3 +73,58 @@ describe('should support for each CSS in JS package', () => {
 		});
 	});
 });
+
+describe('should support for each CSS in JS package with .babelrc', () => {
+	beforeAll(() => {
+		fs.writeFileSync(
+			'.babelrc',
+			`{		
+			"plugins": [["@babel/plugin-proposal-decorators", { "legacy": true }]]
+		}`,
+		);
+	});
+
+	afterAll(() => {
+		fs.rmSync('.babelrc');
+	});
+
+	[
+		'emotion-10.jsx',
+		'glamorous.jsx',
+		'interpolation-content.mjs',
+		'jsx.jsx',
+		'lit-css.mjs',
+		'react-emotion.jsx',
+		'react-native.mjs',
+		'styled-components-nesting-expr.js',
+		'styled-components-nesting.js',
+		'styled-components-nesting2.js',
+		'styled-components-nesting3.js',
+		'styled-components-nesting-nesting.js',
+		'styled-components-nesting-template-literal.js',
+		'styled-components.js',
+		'styled-opts.mjs',
+		'styled-props.jsx',
+		'tpl-decl.mjs',
+		'tpl-in-tpl.mjs',
+		'tpl-selector.mjs',
+		'tpl-special.mjs',
+		'material-ui.jsx',
+	].forEach((file) => {
+		it(`${file}`, () => {
+			file = require.resolve(`./fixtures/${file}`);
+			const code = fs.readFileSync(file);
+			const document = syntax.parse(code, {
+				from: file,
+			});
+
+			expect(document.source).toHaveProperty('lang', 'jsx');
+			expect(document.toString()).toBe(code.toString());
+			expect(document.nodes.length).toBeGreaterThan(0);
+			const parsed = JSON.stringify(clean(document), 0, '\t');
+
+			// fs.writeFileSync(file + ".json", parsed + "\n");
+			expect(parsed).toBe(fs.readFileSync(`${file}.json`, 'utf8').trim());
+		});
+	});
+});
