@@ -96,7 +96,7 @@ class ObjectStringifier extends Stringifier {
 			!/:/.test(value)
 		) {
 			value = `:${value}`;
-		} else if (own === 'before' && /^(decl|rule)$/.test(node.type)) {
+		} else if (own === 'before' && /^(?:decl|rule)$/.test(node.type)) {
 			value = value.replace(/\S+$/, '');
 		}
 
@@ -119,11 +119,12 @@ class ObjectStringifier extends Stringifier {
 			return value;
 		}
 
-		if (/^(prop|selector)$/i.test(prop)) {
+		if (/^(?:prop|selector)$/i.test(prop)) {
 			value = camelCase(value);
 
+			// eslint-disable-next-line regexp/no-unused-capturing-group -- TODO: fix
 			if (node.raws.before && /(\S+)$/.test(node.raws.before)) {
-				value = RegExp.$1 + value;
+				value = RegExp.$1 + value; // eslint-disable-line regexp/no-legacy-features -- TODO: fix
 			} else if (value && !/\W/.test(value)) {
 				return value;
 			}

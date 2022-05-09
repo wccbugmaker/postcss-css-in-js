@@ -51,7 +51,14 @@
   "eslintConfig": {
     "extends": [
       "stylelint"
-    ]
+    ],
+    "globals": {
+      "__dirname": true,
+      "module": true,
+      "require": true
+    },
+    "reportUnusedDisableDirectives": true,
+    "root": true
   },
   "remarkConfig": {
     "plugins": [
@@ -82,7 +89,7 @@
     "codecov": "^3.8.3",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-config-stylelint": "^13.1.0",
+    "eslint-config-stylelint": "^15.1.0",
     "husky": "^7.0.2",
     "is-ci": "^3.0.0",
     "jest": "^28.1.0",
@@ -101,6 +108,9 @@
   "peerDependencies": {
     "postcss": ">=7.0.0",
     "postcss-syntax": ">=0.36.2"
+  },
+  "engines": {
+    "node": ">=12.0.0"
   },
   "publishConfig": {
     "access": "public"

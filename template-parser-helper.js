@@ -2,6 +2,8 @@
 
 const Literal = require('./literal');
 const postcssParse = require('postcss/lib/parse');
+
+// eslint-disable-next-line regexp/no-useless-non-capturing-group, regexp/no-useless-flag -- TODO: fix
 const reNewLine = /(?:\r?\n|\r)/gm;
 const isLiteral = (token) => token[0] === 'word' && /^\$\{[\s\S]*\}$/.test(token[1]);
 
@@ -72,7 +74,7 @@ function freeSemicolon(token) {
 	const nodes = this.current.nodes;
 	const prev = nodes && nodes[nodes.length - 1];
 
-	if (prev && /^(rule|literal)$/.test(prev.type) && !prev.raws.ownSemicolon) {
+	if (prev && /^(?:rule|literal)$/.test(prev.type) && !prev.raws.ownSemicolon) {
 		prev.raws.ownSemicolon = this.spaces;
 		this.spaces = '';
 	}

@@ -128,7 +128,7 @@ class objectParser {
 					.slice(parent.nodes[i - 1].raws.node.end, child.raws.node.start)
 					.replace(/^\s*,+/, '');
 			} else if (node) {
-				child.raws.before = source.slice(node.start, child.raws.node.start).replace(/^\s*{+/, '');
+				child.raws.before = source.slice(node.start, child.raws.node.start).replace(/^\s*\{+/, '');
 			}
 		});
 
@@ -143,10 +143,10 @@ class objectParser {
 					return '';
 				});
 			} else {
-				after = source.slice(node.start, node.end).replace(/^\s*{/, '');
+				after = source.slice(node.start, node.end).replace(/^\s*\{/, '');
 			}
 
-			parent.raws.after = after.replace(/}+\s*$/, '');
+			parent.raws.after = after.replace(/\}+\s*$/, '');
 			parent.raws.semicolon = semicolon || false;
 		}
 	}
@@ -217,10 +217,11 @@ class objectParser {
 		if (node.value.type === 'ObjectExpression') {
 			let rule;
 
+			// eslint-disable-next-line regexp/no-unused-capturing-group, regexp/no-super-linear-backtracking -- TODO: fix
 			if (/^@(\S+)(\s*)(.*)$/.test(key.value)) {
-				const name = RegExp.$1;
-				const afterName = RegExp.$2;
-				const params = RegExp.$3;
+				const name = RegExp.$1; // eslint-disable-line regexp/no-legacy-features -- TODO: fix
+				const afterName = RegExp.$2; // eslint-disable-line regexp/no-legacy-features -- TODO: fix
+				const params = RegExp.$3; // eslint-disable-line regexp/no-legacy-features -- TODO: fix
 				const atRule = postcss.atRule({
 					name: unCamelCase(name),
 					raws: {
@@ -325,6 +326,7 @@ class objectParser {
 			return this.comment(node, parent.parent);
 		}
 
+		// eslint-disable-next-line regexp/no-super-linear-backtracking -- TODO: fix
 		const text = node.value.match(/^(\s*)((?:\S[\s\S]*?)?)(\s*)$/);
 		const comment = postcss.comment({
 			text: text[2],
