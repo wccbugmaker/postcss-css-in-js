@@ -78,14 +78,14 @@ describe('should support for each CSS in JS package with .babelrc', () => {
 	beforeAll(() => {
 		fs.writeFileSync(
 			'.babelrc',
-			`{		
+			`{
 			"plugins": [["@babel/plugin-proposal-decorators", { "legacy": true }]]
 		}`,
 		);
 	});
 
 	afterAll(() => {
-		fs.rmSync('.babelrc');
+		fs.unlinkSync('.babelrc');
 	});
 
 	[
