@@ -51,7 +51,14 @@
   "eslintConfig": {
     "extends": [
       "stylelint"
-    ]
+    ],
+    "globals": {
+      "__dirname": true,
+      "module": true,
+      "require": true
+    },
+    "reportUnusedDisableDirectives": true,
+    "root": true
   },
   "remarkConfig": {
     "plugins": [
@@ -101,6 +108,9 @@
   "peerDependencies": {
     "postcss": ">=7.0.0",
     "postcss-syntax": ">=0.36.2"
+  },
+  "engines": {
+    "node": ">=12.0.0"
   },
   "publishConfig": {
     "access": "public"
