@@ -330,6 +330,21 @@ function literalParser(source, opts, styles) {
 				addObjectJob(path.get('value.expression'));
 			}
 		},
+		JSXElement: (path) => {
+			const ele = path.node.openingElement;
+
+			if (
+				ele.name.name === 'style' &&
+				!ele.selfClosing &&
+				ele.attributes.length &&
+				ele.attributes.find((it) => it.name.name === 'jsx') &&
+				path.node.children.length === 1
+			) {
+				const quasi = path.node.children[0].expression;
+
+				tplLiteral.add(quasi);
+			}
+		},
 		VariableDeclarator: (path) => {
 			variableDeclarator.set(path.node.id, path.node.init ? [path.get('init')] : []);
 		},
