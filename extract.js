@@ -331,18 +331,18 @@ function literalParser(source, opts, styles) {
 			}
 		},
 		JSXElement: (path) => {
-			const ele = path.node.openingElement;
-
 			if (
-				ele.name.name === 'style' &&
-				!ele.selfClosing &&
-				ele.attributes.length &&
-				ele.attributes.find((it) => it.name.name === 'jsx') &&
-				path.node.children.length === 1
+				path.node.openingElement.name.name === 'style' &&
+				!path.node.openingElement.selfClosing &&
+				path.node.openingElement.attributes.length &&
+				path.node.openingElement.attributes.find((it) => it.name.name === 'jsx') &&
+				path.node.children.length
 			) {
-				const quasi = path.node.children[0].expression;
-
-				tplLiteral.add(quasi);
+				path.node.children.forEach((n) => {
+					if (types.isJSXExpressionContainer(n) && types.isTemplateLiteral(n.expression)) {
+						tplLiteral.add(n.expression);
+					}
+				});
 			}
 		},
 		VariableDeclarator: (path) => {

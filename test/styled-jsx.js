@@ -79,6 +79,9 @@ describe('styled-jsx', () => {
 			'export const body = css.global`body { margin: 0; }`',
 			'',
 			'export const link = css.resolve`a { color: green; }`',
+			'',
+			'const ele1 = <style jsx global>{button}</style>',
+			'const ele2 = <style jsx>{body}</style>',
 		].join('\n');
 		const document = syntax.parse(code, {
 			from: undefined,
